@@ -4,10 +4,43 @@ import { Badge } from "@/components/ui/badge";
 
 const projects = [
   {
-    number: "01",
+    label: "Professional",
+    title: "Internal Linking Microservice",
+    period: "May 2026",
+    sortDate: "2026-05",
+    description:
+      "Frontend for an internal linking microservice — surfaces crawl data through an interactive graph inside a website audit tool, giving SEO teams a visual map of internal link structure across pages.",
+    tech: ["Next.js 15", "TypeScript", "Node.js", "D3.js"],
+    demo: "https://app.websiteaudittools.com",
+    repo: null,
+  },
+  {
+    label: "Professional",
+    title: "FreeSERP",
+    period: "May 2026",
+    sortDate: "2026-05",
+    description:
+      "Free keyword ranking tool for SEOs, marketers, and developers — built and extended the frontend, shipping features for keyword discovery and real-time search ranking tracking without a paywall.",
+    tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
+    demo: "https://freeserp.com",
+    repo: null,
+  },
+  {
+    label: "Professional",
+    title: "CRM",
+    period: "May 2026",
+    sortDate: "2026-05",
+    description:
+      "Internal CRM platform — building and maintaining frontend and backend features that manage customer relationships, data records, and operational workflows.",
+    tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
+    demo: null,
+    repo: null,
+  },
+  {
     label: "Professional",
     title: "Dev Config Manager",
     period: "Apr 2026",
+    sortDate: "2026-04",
     description:
       "Configuration management platform that centralizes app settings, environment variables, and deployment configs across projects — custom JWT auth, PostgreSQL via Prisma, and email verification via Nodemailer keep it self-contained without third-party auth dependencies.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Clerk", "Nodemailer", "Radix UI"],
@@ -15,10 +48,43 @@ const projects = [
     repo: null,
   },
   {
-    number: "02",
+    label: "Professional",
+    title: "Fiverr Audit Log Extension",
+    period: "Mar 2026",
+    sortDate: "2026-03",
+    description:
+      "Chrome extension that adds an audit log panel to Fiverr — hides configurable UI elements and pages, letting teams track and control what's visible in their Fiverr workspace.",
+    tech: ["JavaScript", "Chrome Extension API"],
+    demo: "https://chromewebstore.google.com/detail/melfdbdpfbdocahbpeedgelenpkpnemi",
+    repo: null,
+  },
+  {
+    label: "Professional",
+    title: "Employee Portal",
+    period: "Feb 2026",
+    sortDate: "2026-02",
+    description:
+      "Internal employee management portal — contributing to both frontend and backend, shipping features across modules handling employee data, workflows, and operations.",
+    tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
+    demo: null,
+    repo: null,
+  },
+  {
+    label: "Professional",
+    title: "Local Rank Reports",
+    period: "Feb 2026",
+    sortDate: "2026-02",
+    description:
+      "Local SEO reporting platform — maintaining and contributing frontend and backend features that help users track local search rankings and generate reports across locations.",
+    tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
+    demo: "https://www.localrankreports.com",
+    repo: null,
+  },
+  {
     label: "Professional",
     title: "Talent Corner JobPortal",
     period: "Sep 2025 – Dec 2025",
+    sortDate: "2025-12",
     description:
       "Full-stack job portal built during an internship at Talent Corner HR Services — recruiters post and manage listings, job seekers apply and track status, and admins oversee users and platform operations through a role-gated panel.",
     tech: ["React", "Node.js", "Express.js", "MySQL", "JWT"],
@@ -26,10 +92,10 @@ const projects = [
     repo: null,
   },
   {
-    number: "03",
     label: "Professional",
     title: "Growbit",
-    period: "May 2025 – Aug 2025",
+    period: "Jul 2025 – Aug 2025",
+    sortDate: "2025-08",
     description:
       "Investment portfolio management system built for a fintech team — React dashboards surface live holdings data, Express APIs handle transactions, and MySQL powers the underlying data layer.",
     tech: ["React", "Node.js", "Express.js", "MySQL", "Vite"],
@@ -37,10 +103,10 @@ const projects = [
     repo: null,
   },
   {
-    number: "04",
     label: "Professional",
     title: "Saarthi360",
-    period: "May 2025 – Aug 2025",
+    period: "May 2025 – Jul 2025",
+    sortDate: "2025-07",
     description:
       "Business operations platform built for enterprise teams — contributed the reports section and Goal Setter module, wiring React front-ends to a Node.js/MySQL back-end to surface actionable business data.",
     tech: ["React", "Node.js", "Express.js", "MySQL"],
@@ -48,10 +114,10 @@ const projects = [
     repo: null,
   },
   {
-    number: "05",
     label: "College Project",
     title: "Clothify",
     period: "Dec 2024 – Mar 2025",
+    sortDate: "2025-03",
     description:
       "Clothing e-commerce platform built for a college project — products browse into a persistent cart, orders flow through authentication-gated management, and Stripe handles payments end to end.",
     tech: ["React", "Node.js", "Express.js", "MongoDB Atlas", "Stripe"],
@@ -59,10 +125,10 @@ const projects = [
     repo: null,
   },
   {
-    number: "06",
     label: "College Project",
     title: "STVBinge",
     period: "Sep 2024 – Nov 2024",
+    sortDate: "2024-11",
     description:
       "Movie ticket booking platform built for a college project — real-time seat availability updates across user and admin roles, with end-to-end booking workflows backed by a MERN stack.",
     tech: ["React", "Node.js", "Express.js", "MongoDB"],
@@ -70,16 +136,17 @@ const projects = [
     repo: null,
   },
   {
-    number: "07",
     label: "In Progress",
     title: "Performing Arts Management System",
+    period: undefined,
+    sortDate: "0000-00",
     description:
       "Platform built to manage a Bharatanatyam academy's operations — students enroll, batches are scheduled, fees are tracked, and performance records replace the spreadsheets that once ran everything manually.",
     tech: ["Next.js", "TypeScript", "Supabase", "Prisma", "Clerk", "Shadcn UI"],
     demo: null,
     repo: null,
   },
-];
+].sort((a, b) => b.sortDate.localeCompare(a.sortDate));
 
 const miniProjects = [
   {
@@ -128,9 +195,9 @@ export default function Projects() {
         <SectionHeader number="03" title="Projects" />
 
         <div className="grid sm:grid-cols-2 gap-5">
-          {projects.map(({ number, label, title, period, description, tech, demo, repo }) => (
+          {projects.map(({ label, title, period, description, tech, demo, repo }, i) => (
             <Card
-              key={number}
+              key={title}
               className="group relative hover:-translate-y-1 transition-all duration-300 hover:shadow-md border-border"
             >
               {/* Primary left accent */}
@@ -145,7 +212,7 @@ export default function Projects() {
                     className="font-heading font-light leading-none"
                     style={{ fontSize: "4rem", color: "rgba(166, 124, 82, 0.18)" }}
                   >
-                    {number}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="pt-2 flex flex-col items-end gap-1">
                     <Badge
@@ -180,12 +247,12 @@ export default function Projects() {
                 {(demo || repo) && (
                   <div className="flex gap-4">
                     {demo && (
-                      <a href={demo} className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+                      <a href={demo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
                         Live ↗
                       </a>
                     )}
                     {repo && (
-                      <a href={repo} className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+                      <a href={repo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
                         GitHub ↗
                       </a>
                     )}
