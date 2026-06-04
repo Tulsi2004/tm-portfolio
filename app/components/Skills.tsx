@@ -40,6 +40,10 @@ const skillGroups = [
       "Team Leadership", "Team Coordination", "Teamwork",
     ],
   },
+  {
+    category: "Languages",
+    skills: ["English", "Hindi", "Marathi", "Tamil", "Korean (Intermediate)"],
+  },
 ];
 
 export default function Skills() {

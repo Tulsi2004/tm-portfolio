@@ -25,27 +25,18 @@ export default function About() {
               design, and deploying applications on
               production infrastructure.
             </p>
-            <p className="font-body text-foreground leading-8 text-base mb-6">
+            <p className="font-body text-foreground leading-8 text-base mb-8">
               I enjoy understanding complete systems — from designing databases
               and APIs to deploying and maintaining reliable applications. My
               focus is not just writing code, but building solutions that people
               can use.
             </p>
-            <p className="font-body text-foreground leading-8 text-base">
-              Beyond technology, I hold a{" "}
-              <span className="text-primary font-bold">Natya Visharad</span>{" "}
-              degree in Bharatanatyam and a{" "}
-              <span className="text-primary font-bold">Black Belt</span>{" "}
-              in Okinawan-style Karate, with experience competing at state and
-              national levels. I also enjoy sketching and painting, 
-              particularly with oil pastels and watercolours, 
-              as a creative outlet away from screens.
-              These pursuits
-              have strengthened my discipline, consistency, and commitment to
-              continuous growth. I am also learning Korean as I prepare for
-              future Master&apos;s studies in South Korea.
-            </p>
-
+            <blockquote className="border-l-2 border-primary/40 pl-4">
+              <p className="font-heading italic font-light text-lg text-muted-foreground leading-relaxed">
+                &ldquo;Software developer + classical artist — both demand
+                precision and creativity.&rdquo;
+              </p>
+            </blockquote>
           </div>
 
           {/* Highlights */}
@@ -84,13 +75,6 @@ export default function About() {
               ))}
             </div>
 
-            {/* Quote */}
-            <blockquote className="mt-20 border-l-2 border-primary/40 pl-4">
-              <p className="font-heading italic font-light text-lg text-muted-foreground leading-relaxed">
-                &ldquo;Software developer + classical artist — both demand
-                precision and creativity.&rdquo;
-              </p>
-            </blockquote>
           </div>
         </div>
       </div>

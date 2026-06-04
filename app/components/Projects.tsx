@@ -1,3 +1,6 @@
+"use client";
+
+import { useLayoutEffect, useRef, useState } from "react";
 import SectionHeader from "./SectionHeader";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -5,11 +8,22 @@ import { Badge } from "@/components/ui/badge";
 const projects = [
   {
     label: "Professional",
+    title: "PMS",
+    period: "Jun 2026 – Ongoing",
+    sortDate: "2026-06",
+    description:
+      "Internal order and team management platform — role-based access for Admins, Team Leaders, Creators, and Members, with revision workflows, task assignment, and a full authentication flow.",
+    tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
+    demo: "https://pms.zootcloud.com/",
+    repo: null,
+  },
+  {
+    label: "Professional",
     title: "Internal Linking Microservice",
     period: "May 2026",
     sortDate: "2026-05",
     description:
-      "Frontend for an internal linking microservice — surfaces crawl data through an interactive graph inside a website audit tool, giving SEO teams a visual map of internal link structure across pages.",
+      "Frontend for an internal linking microservice — surfaces crawl data as an interactive graph in a website audit tool, giving SEO teams a visual map of site-wide link structure.",
     tech: ["Next.js 15", "TypeScript", "Node.js", "D3.js"],
     demo: "https://app.websiteaudittools.com",
     repo: null,
@@ -17,10 +31,10 @@ const projects = [
   {
     label: "Professional",
     title: "FreeSERP",
-    period: "May 2026",
+    period: "May 2026 – Ongoing",
     sortDate: "2026-05",
     description:
-      "Free keyword ranking tool for SEOs, marketers, and developers — built and extended the frontend, shipping features for keyword discovery and real-time search ranking tracking without a paywall.",
+      "Free keyword ranking tool for SEOs, marketers, and developers — built and extended the frontend, delivering keyword discovery and real-time search ranking tracking, all without a paywall.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://freeserp.com",
     repo: null,
@@ -28,12 +42,12 @@ const projects = [
   {
     label: "Professional",
     title: "CRM",
-    period: "May 2026",
+    period: "May 2026 – Ongoing",
     sortDate: "2026-05",
     description:
-      "Internal CRM platform — building and maintaining frontend and backend features that manage customer relationships, data records, and operational workflows.",
-    tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
-    demo: null,
+      "Sales CRM for tracking clients through pitching workflows, quality checks, and tag-based categorisation — role-based access, real-time alarm notifications, global activity tracking, and a companion Chrome extension.",
+    tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma"],
+    demo: "https://crm.zootcloud.com/",
     repo: null,
   },
   {
@@ -42,7 +56,7 @@ const projects = [
     period: "Apr 2026",
     sortDate: "2026-04",
     description:
-      "Configuration management platform that centralizes app settings, environment variables, and deployment configs across projects — custom JWT auth, PostgreSQL via Prisma, and email verification via Nodemailer keep it self-contained without third-party auth dependencies.",
+      "Centralised config platform for app settings, environment variables, and deployment configs — self-contained with custom JWT auth, PostgreSQL via Prisma, and email verification via Nodemailer.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Clerk", "Nodemailer", "Radix UI"],
     demo: "https://devconfig-manager.vercel.app",
     repo: null,
@@ -53,7 +67,7 @@ const projects = [
     period: "Mar 2026",
     sortDate: "2026-03",
     description:
-      "Chrome extension that adds an audit log panel to Fiverr — hides configurable UI elements and pages, letting teams track and control what's visible in their Fiverr workspace.",
+      "Chrome extension adding an audit log panel to Fiverr — hides configurable UI elements and pages, giving teams full control over what is visible in their shared Fiverr workspace.",
     tech: ["JavaScript", "Chrome Extension API"],
     demo: "https://chromewebstore.google.com/detail/melfdbdpfbdocahbpeedgelenpkpnemi",
     repo: null,
@@ -61,12 +75,12 @@ const projects = [
   {
     label: "Professional",
     title: "Employee Portal",
-    period: "Feb 2026",
+    period: "Feb 2026 – Ongoing",
     sortDate: "2026-02",
     description:
-      "Internal employee management portal — contributing to both frontend and backend, shipping features across modules handling employee data, workflows, and operations.",
+      "Internal employee management portal — contributing across frontend and backend to ship features covering employee records, task workflows, approvals, and the operational tooling teams rely on.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
-    demo: null,
+    demo: "https://portal.zootcloud.com/",
     repo: null,
   },
   {
@@ -75,7 +89,7 @@ const projects = [
     period: "Feb 2026",
     sortDate: "2026-02",
     description:
-      "Local SEO reporting platform — maintaining and contributing frontend and backend features that help users track local search rankings and generate reports across locations.",
+      "Local SEO reporting platform — building and maintaining frontend and backend features that help users track local search rankings, monitor position changes, and generate reports across locations.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://www.localrankreports.com",
     repo: null,
@@ -86,7 +100,7 @@ const projects = [
     period: "Sep 2025 – Dec 2025",
     sortDate: "2025-12",
     description:
-      "Full-stack job portal built during an internship at Talent Corner HR Services — recruiters post and manage listings, job seekers apply and track status, and admins oversee users and platform operations through a role-gated panel.",
+      "Full-stack job portal built at Talent Corner HR — recruiters post and manage listings, applicants apply and track status, and admins oversee platform operations through a role-gated panel.",
     tech: ["React", "Node.js", "Express.js", "MySQL", "JWT"],
     demo: "https://jobportal-talentcor.vercel.app",
     repo: null,
@@ -97,7 +111,7 @@ const projects = [
     period: "Jul 2025 – Aug 2025",
     sortDate: "2025-08",
     description:
-      "Investment portfolio management system built for a fintech team — React dashboards surface live holdings data, Express APIs handle transactions, and MySQL powers the underlying data layer.",
+      "Investment portfolio management system built for a fintech team — led a team of four as team lead, overseeing React dashboards, Express APIs, and MySQL operations through to deployment.",
     tech: ["React", "Node.js", "Express.js", "MySQL", "Vite"],
     demo: "https://investment-frontend-eight.vercel.app",
     repo: null,
@@ -108,9 +122,9 @@ const projects = [
     period: "May 2025 – Jul 2025",
     sortDate: "2025-07",
     description:
-      "Business operations platform built for enterprise teams — contributed the reports section and Goal Setter module, wiring React front-ends to a Node.js/MySQL back-end to surface actionable business data.",
+      "Business operations platform for enterprise teams — contributed the reports section and Goal Setter module, wiring React frontends to a Node.js/MySQL backend to surface actionable business data.",
     tech: ["React", "Node.js", "Express.js", "MySQL"],
-    demo: null,
+    demo: "https://www.sarthi360.in/",
     repo: null,
   },
   {
@@ -130,7 +144,7 @@ const projects = [
     period: "Sep 2024 – Nov 2024",
     sortDate: "2024-11",
     description:
-      "Movie ticket booking platform built for a college project — real-time seat availability updates across user and admin roles, with end-to-end booking workflows backed by a MERN stack.",
+      "Movie ticket booking platform built for a college project — led a team of three, delivering real-time seat availability, role-based access for users and admins, and end-to-end booking flows.",
     tech: ["React", "Node.js", "Express.js", "MongoDB"],
     demo: null,
     repo: null,
@@ -141,7 +155,7 @@ const projects = [
     period: undefined,
     sortDate: "0000-00",
     description:
-      "Platform built to manage a Bharatanatyam academy's operations — students enroll, batches are scheduled, fees are tracked, and performance records replace the spreadsheets that once ran everything manually.",
+      "Platform built to manage a Bharatanatyam academy — students enroll, batches are scheduled, fees are tracked, and performance records replace the spreadsheets that once handled it all.",
     tech: ["Next.js", "TypeScript", "Supabase", "Prisma", "Clerk", "Shadcn UI"],
     demo: null,
     repo: null,
@@ -188,79 +202,182 @@ const labelStyles: Record<string, string> = {
   "In Progress":     "text-amber-700 border-amber-400/40",
 };
 
+const labelAccent: Record<string, string> = {
+  Professional:      "linear-gradient(to bottom, #a67c52, rgba(166,124,82,0.12))",
+  "College Project": "linear-gradient(to bottom, #8a9099, rgba(138,144,153,0.12))",
+  "In Progress":     "linear-gradient(to bottom, #b07d2a, rgba(176,125,42,0.12))",
+  Personal:          "linear-gradient(to bottom, #5b8dd9, rgba(91,141,217,0.12))",
+};
+
+const FILTERS = ["All", "Professional", "College Project", "In Progress"] as const;
+type Filter = (typeof FILTERS)[number];
+type Sort = "newest" | "oldest";
+
 export default function Projects() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [filter, setFilter] = useState<Filter>("All");
+  const [sort, setSort] = useState<Sort>("newest");
+
+  const visible = projects
+    .filter((p) => filter === "All" || p.label === filter)
+    .sort((a, b) =>
+      sort === "newest"
+        ? b.sortDate.localeCompare(a.sortDate)
+        : a.sortDate.localeCompare(b.sortDate)
+    );
+
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const cards = Array.from(el.querySelectorAll<HTMLElement>("[data-animate]"));
+
+    const reveal = (target: HTMLElement) => {
+      target.style.opacity = "1";
+      target.style.transform = "translateY(0)";
+    };
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            reveal(entry.target as HTMLElement);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+
+    cards.forEach((c) => {
+      const rect = c.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        reveal(c);
+      } else {
+        c.style.opacity = "0";
+        c.style.transform = "translateY(20px)";
+        c.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        obs.observe(c);
+      }
+    });
+
+    return () => obs.disconnect();
+  }, [filter, sort]);
+
   return (
     <section id="projects" className="py-28 px-6 bg-muted/40">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto" ref={containerRef}>
         <SectionHeader number="03" title="Projects" />
 
-        <div className="grid sm:grid-cols-2 gap-5">
-          {projects.map(({ label, title, period, description, tech, demo, repo }, i) => (
-            <Card
-              key={title}
-              className="group relative hover:-translate-y-1 transition-all duration-300 hover:shadow-md border-border"
+        {/* Filter tabs */}
+        <div className="flex gap-2 flex-wrap mb-12">
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`font-body text-[11px] tracking-[0.2em] uppercase px-3 py-1.5 border rounded-sm transition-colors duration-200 ${
+                filter === f
+                  ? "border-primary/60 text-primary bg-primary/5"
+                  : "border-border text-muted-foreground hover:text-primary hover:border-primary/30"
+              }`}
             >
-              {/* Primary left accent */}
-              <div
-                className="absolute left-0 top-5 bottom-5 w-0.5 rounded-full"
-                style={{ background: "linear-gradient(to bottom, #a67c52, rgba(166, 124, 82, 0.12))" }}
-              />
-
-              <CardHeader className="pl-6">
-                <div className="flex items-start justify-between mb-1">
-                  <span
-                    className="font-heading font-light leading-none"
-                    style={{ fontSize: "4rem", color: "rgba(166, 124, 82, 0.18)" }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="pt-2 flex flex-col items-end gap-1">
-                    <Badge
-                      variant="outline"
-                      className={`font-body text-[10px] tracking-wide ${labelStyles[label]}`}
-                    >
-                      {label}
-                    </Badge>
-                    {period && (
-                      <span className="font-body text-[10px] text-muted-foreground">
-                        {period}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <CardTitle className="font-heading text-[1.3rem] font-semibold leading-snug">
-                  {title}
-                </CardTitle>
-                <CardDescription className="font-body text-sm leading-relaxed">
-                  {description}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="pl-6">
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {tech.map((t) => (
-                    <Badge key={t} variant="outline" className="font-body text-[11px] text-primary border-primary/30">
-                      {t}
-                    </Badge>
-                  ))}
-                </div>
-                {(demo || repo) && (
-                  <div className="flex gap-4">
-                    {demo && (
-                      <a href={demo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
-                        Live ↗
-                      </a>
-                    )}
-                    {repo && (
-                      <a href={repo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
-                        GitHub ↗
-                      </a>
-                    )}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+              {f}
+            </button>
           ))}
+        </div>
+
+        {/* Count + sort row */}
+        <div className="flex items-center justify-between mb-6">
+          <span className="font-body text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
+            <span className="text-primary">{visible.length}</span>
+            {" "}project{visible.length !== 1 ? "s" : ""}
+          </span>
+          <div className="flex gap-1">
+            {(["newest", "oldest"] as const).map((s) => (
+              <button
+                key={s}
+                onClick={() => setSort(s)}
+                className={`font-body text-[11px] tracking-[0.15em] uppercase px-2.5 py-1 border rounded-sm transition-colors duration-200 ${
+                  sort === s
+                    ? "border-primary/60 text-primary bg-primary/5"
+                    : "border-border text-muted-foreground hover:text-primary hover:border-primary/30"
+                }`}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Cards grid — 3 equal columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {visible.map(({ label, title, period, description, tech, demo, repo }, i) => (
+              <Card
+                key={title}
+                data-animate
+                style={{ transitionDelay: `${(i % 3) * 100}ms` }}
+                className="group relative hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_4px_22px_rgba(166,124,82,0.14)] border-border"
+              >
+                {/* Label-coloured left accent bar */}
+                <div
+                  className="absolute left-0 top-5 bottom-5 w-0.5 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: labelAccent[label] ?? labelAccent["Professional"] }}
+                />
+
+                <CardHeader className="pl-6">
+                  <div className="flex items-start justify-between mb-1">
+                    <span
+                      className="font-heading font-light leading-none"
+                      style={{ fontSize: "4rem", color: "rgba(166, 124, 82, 0.18)" }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="pt-2 flex flex-col items-end gap-1">
+                      <Badge
+                        variant="outline"
+                        className={`font-body text-[10px] tracking-wide ${labelStyles[label]}`}
+                      >
+                        {label}
+                      </Badge>
+                      {period && (
+                        <span className="font-body text-[10px] text-muted-foreground">
+                          {period}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <CardTitle className="font-heading text-[1.3rem] font-semibold leading-snug">
+                    {title}
+                  </CardTitle>
+                  <CardDescription className="font-body text-sm leading-relaxed">
+                    {description}
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent className="pl-6">
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {tech.map((t) => (
+                      <Badge key={t} variant="outline" className="font-body text-[11px] text-primary border-primary/30">
+                        {t}
+                      </Badge>
+                    ))}
+                  </div>
+                  {(demo || repo) && (
+                    <div className="flex gap-4">
+                      {demo && (
+                        <a href={demo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+                          Live ↗
+                        </a>
+                      )}
+                      {repo && (
+                        <a href={repo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+                          GitHub ↗
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
         </div>
 
         {/* Mini Projects */}
@@ -269,10 +386,12 @@ export default function Projects() {
             Mini Projects
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {miniProjects.map(({ title, description, period, tech }) => (
+            {miniProjects.map(({ title, description, period, tech }, i) => (
               <div
                 key={title}
-                className="bg-card border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-sm transition-all duration-200"
+                data-animate
+                style={{ transitionDelay: `${(i % 3) * 90}ms` }}
+                className="bg-card border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-[0_2px_14px_rgba(166,124,82,0.1)] transition-all duration-200"
               >
                 <div className="flex items-start justify-between mb-2">
                   <h4 className="font-heading text-sm font-semibold text-foreground leading-snug">

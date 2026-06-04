@@ -1,25 +1,28 @@
 "use client";
-import { useState } from "react";
+
+import { useActionState, useEffect, useRef } from "react";
 import SectionHeader from "./SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { sendContactEmail, type ContactState } from "@/app/actions/contact";
 
 const socials = [
-  { label: "Email", value: "tulsimani04@gmail.com", href: "mailto:tulsimani04@gmail.com" },
+  { label: "Email",    value: "tulsimani04@gmail.com",          href: "mailto:tulsimani04@gmail.com" },
+  { label: "Phone",    value: "+91 93266 36546",                href: "tel:+919326636546" },
   { label: "LinkedIn", value: "linkedin.com/in/tulsimani-kumar", href: "https://www.linkedin.com/in/tulsimani-kumar" },
-  { label: "GitHub", value: "github.com/tulsi2004", href: "https://github.com/tulsi2004" },
+  { label: "GitHub",   value: "github.com/tulsi2004",           href: "https://github.com/tulsi2004" },
 ];
 
+const initial: ContactState = { success: false, error: "" };
+
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [state, formAction, isPending] = useActionState(sendContactEmail, initial);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
-  const mailtoHref = `mailto:tulsimani04@gmail.com?subject=${encodeURIComponent(
-    `Portfolio Contact from ${form.name}`
-  )}&body=${encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`)}`;
+  useEffect(() => {
+    if (state.success) formRef.current?.reset();
+  }, [state.success]);
 
   return (
     <section id="contact" className="py-28 px-6 bg-background">
@@ -41,7 +44,7 @@ export default function Contact() {
                 <a
                   key={label}
                   href={href}
-                  target={href.startsWith("mailto") ? undefined : "_blank"}
+                  target={href.startsWith("mailto") || href.startsWith("tel") ? undefined : "_blank"}
                   rel="noopener noreferrer"
                   className="flex items-center gap-5 group"
                 >
@@ -68,34 +71,47 @@ export default function Contact() {
             <p className="font-body text-[10px] text-muted-foreground tracking-[0.3em] uppercase mb-7">
               Send a Message
             </p>
-            <div className="space-y-3.5">
+            <form ref={formRef} action={formAction} className="space-y-3.5">
               <Input
                 name="name"
                 placeholder="Your Name"
-                value={form.name}
-                onChange={handleChange}
+                required
                 className="font-body text-sm bg-card"
               />
               <Input
                 type="email"
                 name="email"
                 placeholder="Your Email"
-                value={form.email}
-                onChange={handleChange}
+                required
                 className="font-body text-sm bg-card"
               />
               <Textarea
                 name="message"
                 placeholder="Your Message"
                 rows={5}
-                value={form.message}
-                onChange={handleChange}
+                required
                 className="font-body text-sm bg-card resize-none"
               />
-              <Button asChild className="w-full font-body text-xs tracking-[0.2em] uppercase rounded">
-                <a href={mailtoHref}>Send Message</a>
+
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="w-full font-body text-xs tracking-[0.2em] uppercase rounded"
+              >
+                {isPending ? "Sending…" : "Send Message"}
               </Button>
-            </div>
+
+              {state.success && (
+                <p className="font-body text-sm text-primary text-center pt-1">
+                  Message sent — I&apos;ll get back to you soon.
+                </p>
+              )}
+              {state.error && (
+                <p className="font-body text-sm text-destructive text-center pt-1">
+                  {state.error}
+                </p>
+              )}
+            </form>
           </div>
         </div>
       </div>

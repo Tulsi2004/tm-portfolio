@@ -8,7 +8,7 @@ export default function Footer() {
         <span className="font-heading text-xl text-primary tracking-widest">TK</span>
         <p className="font-body text-xs text-muted-foreground tracking-wide text-center">
           Designed &amp; built by{" "}
-          <span className="text-foreground">Tulsimani Kumar</span> · 2026
+          <span className="text-foreground">Tulsimani Kumar</span> ·June 2026
         </p>
         <a
           href="#"
