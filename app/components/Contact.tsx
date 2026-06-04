@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import SectionHeader from "./SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,9 +19,15 @@ const initial: ContactState = { success: false, error: "" };
 export default function Contact() {
   const [state, formAction, isPending] = useActionState(sendContactEmail, initial);
   const formRef = useRef<HTMLFormElement>(null);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    if (state.success) formRef.current?.reset();
+    if (state.success) {
+      formRef.current?.reset();
+      setShowSuccess(true);
+      const t = setTimeout(() => setShowSuccess(false), 4000);
+      return () => clearTimeout(t);
+    }
   }, [state.success]);
 
   return (
@@ -101,7 +107,7 @@ export default function Contact() {
                 {isPending ? "Sending…" : "Send Message"}
               </Button>
 
-              {state.success && (
+              {showSuccess && (
                 <p className="font-body text-sm text-primary text-center pt-1">
                   Message sent — I&apos;ll get back to you soon.
                 </p>
