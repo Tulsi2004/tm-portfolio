@@ -9,7 +9,7 @@ import { sendContactEmail, type ContactState } from "@/app/actions/contact";
 
 const socials = [
   { label: "Email",    value: "tulsimani04@gmail.com",          href: "mailto:tulsimani04@gmail.com" },
-  { label: "Phone",    value: "+91 93266 36546",                href: "tel:+919326636546" },
+  // { label: "Phone",    value: "+91 93266 36546",                href: "tel:+919326636546" },
   { label: "LinkedIn", value: "linkedin.com/in/tulsimani-kumar", href: "https://www.linkedin.com/in/tulsimani-kumar" },
   { label: "GitHub",   value: "github.com/tulsi2004",           href: "https://github.com/tulsi2004" },
 ];
