@@ -264,7 +264,7 @@ export default function Projects() {
   }, [filter, sort]);
 
   return (
-    <section id="projects" className="py-28 px-6 bg-muted/40">
+    <section id="projects" className="py-16 md:py-28 px-6 bg-muted/40">
       <div className="max-w-5xl mx-auto" ref={containerRef}>
         <SectionHeader number="03" title="Projects" />
 

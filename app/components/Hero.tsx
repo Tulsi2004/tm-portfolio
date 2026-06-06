@@ -27,10 +27,10 @@ export default function Hero() {
       <div className="min-h-[calc(100vh-7rem)] flex flex-col items-center justify-center text-center">
         {/* Name */}
         <h1 className="font-heading font-light leading-[0.88] tracking-tight mb-4">
-          <span className="block text-7xl sm:text-8xl lg:text-[9.5rem] text-foreground">
+          <span className="block text-5xl sm:text-8xl lg:text-[9.5rem] text-foreground">
             Tulsimani
           </span>
-          <span className="block text-7xl sm:text-8xl lg:text-[9.5rem] italic text-primary">
+          <span className="block text-5xl sm:text-8xl lg:text-[9.5rem] italic text-primary">
             Kumar
           </span>
         </h1>

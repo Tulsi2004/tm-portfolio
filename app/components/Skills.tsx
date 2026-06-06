@@ -48,7 +48,7 @@ const skillGroups = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-28 px-6 bg-background">
+    <section id="skills" className="py-16 md:py-28 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <SectionHeader number="02" title="Skills" />
 
@@ -56,7 +56,7 @@ export default function Skills() {
           {skillGroups.map(({ category, skills }) => (
             <div
               key={category}
-              className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-x-10 gap-y-1 py-5"
+              className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-10 gap-y-1 py-5"
             >
               <span className="font-heading text-sm font-semibold text-primary pt-0.5">
                 {category}

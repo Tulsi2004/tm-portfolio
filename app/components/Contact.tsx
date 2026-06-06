@@ -31,7 +31,7 @@ export default function Contact() {
   }, [state.success]);
 
   return (
-    <section id="contact" className="py-28 px-6 bg-background">
+    <section id="contact" className="py-16 md:py-28 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           number="06"

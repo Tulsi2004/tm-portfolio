@@ -105,6 +105,7 @@ function circularOffset(i: number, current: number) {
 
 export default function BeyondTech() {
   const [current, setCurrent] = useState(0);
+  const [vw, setVw] = useState(1024);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pauseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -125,6 +126,13 @@ export default function BeyondTech() {
   }, []);
 
   useEffect(() => {
+    const onResize = () => setVw(window.innerWidth);
+    onResize();
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
     startAuto();
     return () => {
       stopAuto();
@@ -140,7 +148,7 @@ export default function BeyondTech() {
   };
 
   return (
-    <section id="beyond" className="py-28 px-6 bg-muted/40">
+    <section id="beyond" className="py-16 md:py-28 px-6 bg-muted/40">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           number="05"
@@ -166,7 +174,8 @@ export default function BeyondTech() {
             const offset = circularOffset(i, current);
             if (Math.abs(offset) > 2) return null;
 
-            const tx = offset * 230;
+            const txBase = Math.min(230, Math.round((vw - 48) * 0.68));
+            const tx = offset * txBase;
             const ry = -offset * 38;
             const sc = offset === 0 ? 1 : Math.abs(offset) === 1 ? 0.78 : 0.62;
             const op = offset === 0 ? 1 : Math.abs(offset) === 1 ? 0.5 : 0.22;
@@ -182,7 +191,7 @@ export default function BeyondTech() {
                   zIndex: zi,
                   transition: "transform 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.55s ease",
                 }}
-                className={`absolute w-72 rounded-2xl border bg-card overflow-hidden p-7 flex flex-col h-96 ${
+                className={`absolute w-[min(18rem,calc(100vw-3.5rem))] rounded-2xl border bg-card overflow-hidden p-5 sm:p-7 flex flex-col h-96 ${
                   offset === 0
                     ? "border-primary/30 shadow-lg"
                     : "border-border cursor-pointer"

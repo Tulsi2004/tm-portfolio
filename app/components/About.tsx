@@ -10,7 +10,7 @@ const highlights = [
 
 export default function About() {
   return (
-    <section id="about" className="py-28 px-6 bg-muted/40">
+    <section id="about" className="py-16 md:py-28 px-6 bg-muted/40">
       <div className="max-w-5xl mx-auto">
         <SectionHeader number="01" title="About Me" />
 
@@ -58,7 +58,7 @@ export default function About() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-5   mt-18">
+            <div className="grid grid-cols-3 gap-5 mt-10 md:mt-18">
               {[
                 { number: "9+", label: "Years of Bharatanatyam" },
                 { number: "7+", label: "Years of Karate" },

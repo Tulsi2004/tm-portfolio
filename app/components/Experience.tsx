@@ -111,7 +111,7 @@ const companies = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-28 px-6 bg-background">
+    <section id="experience" className="py-16 md:py-28 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <SectionHeader number="04" title="Experience" />
 
