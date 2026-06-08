@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 const projects = [
   {
     label: "Professional",
+    role: "contributing" as const,
     title: "PMS",
     period: "Jun 2026 – Ongoing",
     sortDate: "2026-06",
@@ -19,6 +20,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "contributing" as const,
     title: "Internal Linking Microservice",
     period: "May 2026",
     sortDate: "2026-05",
@@ -30,6 +32,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "contributing" as const,
     title: "FreeSERP",
     period: "May 2026 – Ongoing",
     sortDate: "2026-05",
@@ -41,6 +44,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "contributing" as const,
     title: "CRM",
     period: "May 2026 – Ongoing",
     sortDate: "2026-05",
@@ -52,6 +56,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "built" as const,
     title: "Dev Config Manager",
     period: "Apr 2026",
     sortDate: "2026-04",
@@ -63,6 +68,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "built" as const,
     title: "Fiverr Audit Log Extension",
     period: "Mar 2026",
     sortDate: "2026-03",
@@ -74,6 +80,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "contributing" as const,
     title: "Employee Portal",
     period: "Feb 2026 – Ongoing",
     sortDate: "2026-02",
@@ -85,6 +92,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "contributing" as const,
     title: "Local Rank Reports",
     period: "Feb 2026",
     sortDate: "2026-02",
@@ -96,6 +104,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "built" as const,
     title: "Talent Corner JobPortal",
     period: "Sep 2025 – Dec 2025",
     sortDate: "2025-12",
@@ -107,6 +116,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "built" as const,
     title: "Growbit",
     period: "Jul 2025 – Aug 2025",
     sortDate: "2025-08",
@@ -118,6 +128,7 @@ const projects = [
   },
   {
     label: "Professional",
+    role: "contributing" as const,
     title: "Saarthi360",
     period: "May 2025 – Jul 2025",
     sortDate: "2025-07",
@@ -128,7 +139,8 @@ const projects = [
     repo: null,
   },
   {
-    label: "College Project",
+    label: "Academic",
+    role: "built" as const,
     title: "Clothify",
     period: "Dec 2024 – Mar 2025",
     sortDate: "2025-03",
@@ -136,10 +148,11 @@ const projects = [
       "Clothing e-commerce platform built for a college project — products browse into a persistent cart, orders flow through authentication-gated management, and Stripe handles payments end to end.",
     tech: ["React", "Node.js", "Express.js", "MongoDB Atlas", "Stripe"],
     demo: null,
-    repo: null,
+    repo: "https://github.com/Tulsi2004/Clothify_Frontend",
   },
   {
-    label: "College Project",
+    label: "Academic",
+    role: "built" as const,
     title: "STVBinge",
     period: "Sep 2024 – Nov 2024",
     sortDate: "2024-11",
@@ -147,10 +160,11 @@ const projects = [
       "Movie ticket booking platform built for a college project — led a team of three, delivering real-time seat availability, role-based access for users and admins, and end-to-end booking flows.",
     tech: ["React", "Node.js", "Express.js", "MongoDB"],
     demo: null,
-    repo: null,
+    repo: "https://github.com/Tulsi2004/STVBinge_Frontend",
   },
   {
     label: "In Progress",
+    role: "built" as const,
     title: "Performing Arts Management System",
     period: undefined,
     sortDate: "0000-00",
@@ -196,20 +210,20 @@ const miniProjects = [
 ];
 
 const labelStyles: Record<string, string> = {
-  Professional:      "text-primary border-primary/30",
-  "College Project": "text-muted-foreground border-border",
-  Personal:          "text-sky-700 border-sky-400/40",
-  "In Progress":     "text-amber-700 border-amber-400/40",
+  Professional:      "text-primary border-primary/50 bg-primary/10",
+  "Academic": "text-muted-foreground border-border bg-muted",
+  Personal:          "text-sky-700 border-sky-400/50 bg-sky-50",
+  "In Progress":     "text-amber-700 border-amber-400/50 bg-amber-50",
 };
 
 const labelAccent: Record<string, string> = {
   Professional:      "linear-gradient(to bottom, #a67c52, rgba(166,124,82,0.12))",
-  "College Project": "linear-gradient(to bottom, #8a9099, rgba(138,144,153,0.12))",
+  "Academic": "linear-gradient(to bottom, #8a9099, rgba(138,144,153,0.12))",
   "In Progress":     "linear-gradient(to bottom, #b07d2a, rgba(176,125,42,0.12))",
   Personal:          "linear-gradient(to bottom, #5b8dd9, rgba(91,141,217,0.12))",
 };
 
-const FILTERS = ["All", "Professional", "College Project", "In Progress"] as const;
+const FILTERS = ["All", "Professional", "Academic", "In Progress"] as const;
 type Filter = (typeof FILTERS)[number];
 type Sort = "newest" | "oldest";
 
@@ -310,12 +324,12 @@ export default function Projects() {
 
         {/* Cards grid — 3 equal columns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {visible.map(({ label, title, period, description, tech, demo, repo }, i) => (
+          {visible.map(({ label, role, title, period, description, tech, demo, repo }, i) => (
               <Card
                 key={title}
                 data-animate
                 style={{ transitionDelay: `${(i % 3) * 100}ms` }}
-                className="group relative hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_4px_22px_rgba(166,124,82,0.14)] border-border"
+                className="group relative flex flex-col hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_4px_22px_rgba(166,124,82,0.14)] border-border"
               >
                 {/* Label-coloured left accent bar */}
                 <div
@@ -331,13 +345,30 @@ export default function Projects() {
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <div className="pt-2 flex flex-col items-end gap-1">
-                      <Badge
-                        variant="outline"
-                        className={`font-body text-[10px] tracking-wide ${labelStyles[label]}`}
-                      >
-                        {label}
-                      </Badge>
+                    <div className="pt-2 flex flex-col items-end gap-1.5">
+                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                        <Badge
+                          variant="outline"
+                          className={`font-body text-[10px] tracking-wide ${labelStyles[label]}`}
+                        >
+                          {label}
+                        </Badge>
+                        {role === "built" ? (
+                          <Badge
+                            variant="outline"
+                            className="font-body text-[10px] tracking-wide text-foreground border-foreground/40 bg-foreground/[0.06]"
+                          >
+                            Creator
+                          </Badge>
+                        ) : (
+                          <Badge
+                            variant="outline"
+                            className="font-body text-[10px] tracking-wide text-muted-foreground border-dashed border-muted-foreground/40 bg-muted-foreground/[0.06]"
+                          >
+                            Contributor
+                          </Badge>
+                        )}
+                      </div>
                       {period && (
                         <span className="font-body text-[10px] text-muted-foreground">
                           {period}
@@ -353,7 +384,7 @@ export default function Projects() {
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className="pl-6">
+                <CardContent className="pl-6 flex flex-col flex-1">
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {tech.map((t) => (
                       <Badge key={t} variant="outline" className="font-body text-[11px] text-primary border-primary/30">
@@ -362,14 +393,14 @@ export default function Projects() {
                     ))}
                   </div>
                   {(demo || repo) && (
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 mt-auto pt-4 border-t border-border/50">
                       {demo && (
-                        <a href={demo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+                        <a href={demo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-blue-500 font-medium hover:text-blue-600 transition-colors duration-200">
                           Live ↗
                         </a>
                       )}
                       {repo && (
-                        <a href={repo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+                        <a href={repo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-blue-700 font-medium hover:text-blue-800 transition-colors duration-200">
                           GitHub ↗
                         </a>
                       )}

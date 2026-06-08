@@ -62,7 +62,7 @@ export default function Hero() {
       {/* Below fold — visible on scroll */}
       <div className="flex flex-col items-center text-center pt-20 pb-24">
         <p className="font-heading italic font-light text-xl sm:text-2xl text-muted-foreground max-w-sm mx-auto mb-12 leading-relaxed">
-          Code and creativity, in equal measure.
+          Where logic meets expression.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4">

@@ -4,7 +4,7 @@ const highlights = [
   { label: "Degree", value: "B.Sc. Computer Science, 2025" },
   { label: "Focus", value: "Full Stack Development" },
   { label: "Interests", value: "Technology, Culture & Personal Growth" },
-  { label: "Language", value: "Korean — Learning (TOPIK I & II)" },
+  { label: "Language", value: "Korean — TOPIK Preparation" },
   { label: "Passion", value: "Bharatanatyam & Classical Arts" },
 ];
 
