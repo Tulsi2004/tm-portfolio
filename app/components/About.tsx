@@ -62,7 +62,7 @@ export default function About() {
               {[
                 { number: "9+", label: "Years of Bharatanatyam" },
                 { number: "7+", label: "Years of Karate" },
-                { number: "4+", label: "Projects Shipped" },
+                { number: "6+", label: "Projects Shipped" },
               ].map(({ number, label }) => (
                 <div key={label}>
                   <p className="font-heading text-3xl font-semibold text-primary leading-none mb-2">
