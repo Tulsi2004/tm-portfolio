@@ -1,13 +1,13 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import SectionHeader from "./SectionHeader";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const projects = [
   {
-    label: "Professional",
+    label: "Industry",
     role: "contributing" as const,
     title: "PMS",
     period: "Jun 2026 – Ongoing",
@@ -19,7 +19,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "contributing" as const,
     title: "Internal Linking Microservice",
     period: "May 2026",
@@ -31,7 +31,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "contributing" as const,
     title: "FreeSERP",
     period: "May 2026 – Ongoing",
@@ -43,7 +43,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "contributing" as const,
     title: "CRM",
     period: "May 2026 – Ongoing",
@@ -55,7 +55,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "built" as const,
     title: "Dev Config Manager",
     period: "Apr 2026",
@@ -67,7 +67,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "built" as const,
     title: "Fiverr Audit Log Extension",
     period: "Mar 2026",
@@ -79,7 +79,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "contributing" as const,
     title: "Employee Portal",
     period: "Feb 2026 – Ongoing",
@@ -91,7 +91,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "contributing" as const,
     title: "Local Rank Reports",
     period: "Feb 2026",
@@ -103,7 +103,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "built" as const,
     title: "Talent Corner JobPortal",
     period: "Sep 2025 – Dec 2025",
@@ -115,7 +115,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "built" as const,
     title: "Growbit",
     period: "Jul 2025 – Aug 2025",
@@ -127,7 +127,7 @@ const projects = [
     repo: null,
   },
   {
-    label: "Professional",
+    label: "Industry",
     role: "contributing" as const,
     title: "Saarthi360",
     period: "May 2025 – Jul 2025",
@@ -210,25 +210,28 @@ const miniProjects = [
 ];
 
 const labelStyles: Record<string, string> = {
-  Professional:      "text-primary border-primary/50 bg-primary/10",
+  Industry:      "text-primary border-primary/50 bg-primary/10",
   "Academic": "text-muted-foreground border-border bg-muted",
   Personal:          "text-sky-700 border-sky-400/50 bg-sky-50",
   "In Progress":     "text-amber-700 border-amber-400/50 bg-amber-50",
 };
 
 const labelAccent: Record<string, string> = {
-  Professional:      "linear-gradient(to bottom, #a67c52, rgba(166,124,82,0.12))",
+  Industry:      "linear-gradient(to bottom, #a67c52, rgba(166,124,82,0.12))",
   "Academic": "linear-gradient(to bottom, #8a9099, rgba(138,144,153,0.12))",
   "In Progress":     "linear-gradient(to bottom, #b07d2a, rgba(176,125,42,0.12))",
   Personal:          "linear-gradient(to bottom, #5b8dd9, rgba(91,141,217,0.12))",
 };
 
-const FILTERS = ["All", "Professional", "Academic", "In Progress"] as const;
+const FILTERS = ["All", "Industry", "Academic", "In Progress"] as const;
 type Filter = (typeof FILTERS)[number];
 type Sort = "newest" | "oldest";
 
 export default function Projects() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pauseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [filter, setFilter] = useState<Filter>("All");
   const [sort, setSort] = useState<Sort>("newest");
 
@@ -239,6 +242,53 @@ export default function Projects() {
         ? b.sortDate.localeCompare(a.sortDate)
         : a.sortDate.localeCompare(b.sortDate)
     );
+
+  const advance = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-card]");
+    const amount = card ? card.offsetWidth + 20 : el.clientWidth;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+    if (atEnd) {
+      el.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      el.scrollBy({ left: amount, behavior: "smooth" });
+    }
+  }, []);
+
+  const stopAuto = useCallback(() => {
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+  }, []);
+
+  const startAuto = useCallback(() => {
+    stopAuto();
+    timerRef.current = setInterval(advance, 3000);
+  }, [advance, stopAuto]);
+
+  const scrollCarousel = (dir: "prev" | "next") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    stopAuto();
+    if (pauseRef.current) clearTimeout(pauseRef.current);
+    const card = el.querySelector<HTMLElement>("[data-card]");
+    const amount = card ? card.offsetWidth + 20 : el.clientWidth;
+    if (dir === "next") {
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + amount, behavior: "smooth" });
+    } else {
+      el.scrollBy({ left: -amount, behavior: "smooth" });
+    }
+    pauseRef.current = setTimeout(startAuto, 8000);
+  };
+
+  useEffect(() => {
+    startAuto();
+    return () => { stopAuto(); if (pauseRef.current) clearTimeout(pauseRef.current); };
+  }, [startAuto, stopAuto]);
+
+  useLayoutEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollLeft = 0;
+  }, [filter, sort]);
 
   useLayoutEffect(() => {
     const el = containerRef.current;
@@ -299,42 +349,63 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Count + sort row */}
+        {/* Count + sort + arrows row */}
         <div className="flex items-center justify-between mb-6">
           <span className="font-body text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
             <span className="text-primary">{visible.length}</span>
             {" "}project{visible.length !== 1 ? "s" : ""}
           </span>
-          <div className="flex gap-1">
-            {(["newest", "oldest"] as const).map((s) => (
+          <div className="flex items-center gap-3">
+            <div className="flex gap-1">
+              {(["newest", "oldest"] as const).map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setSort(s)}
+                  className={`font-body text-[11px] tracking-[0.15em] uppercase px-2.5 py-1 border rounded-sm transition-colors duration-200 ${
+                    sort === s
+                      ? "border-primary/60 text-primary bg-primary/5"
+                      : "border-border text-muted-foreground hover:text-primary hover:border-primary/30"
+                  }`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+            <div className="flex gap-1.5">
               <button
-                key={s}
-                onClick={() => setSort(s)}
-                className={`font-body text-[11px] tracking-[0.15em] uppercase px-2.5 py-1 border rounded-sm transition-colors duration-200 ${
-                  sort === s
-                    ? "border-primary/60 text-primary bg-primary/5"
-                    : "border-border text-muted-foreground hover:text-primary hover:border-primary/30"
-                }`}
+                onClick={() => scrollCarousel("prev")}
+                aria-label="Previous"
+                className="w-8 h-8 flex items-center justify-center border border-border rounded-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors duration-200 text-sm"
               >
-                {s}
+                ←
               </button>
-            ))}
+              <button
+                onClick={() => scrollCarousel("next")}
+                aria-label="Next"
+                className="w-8 h-8 flex items-center justify-center border border-border rounded-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors duration-200 text-sm"
+              >
+                →
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Cards grid — 3 equal columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Cards carousel */}
+        <div
+          ref={scrollRef}
+          className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {visible.map(({ label, role, title, period, description, tech, demo, repo }, i) => (
               <Card
                 key={title}
-                data-animate
+                data-card
                 style={{ transitionDelay: `${(i % 3) * 100}ms` }}
-                className="group relative flex flex-col hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_4px_22px_rgba(166,124,82,0.14)] border-border"
+                className="flex-none w-[min(calc(100vw-3.5rem),22rem)] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] snap-start group relative flex flex-col hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_4px_22px_rgba(166,124,82,0.14)] border-border"
               >
                 {/* Label-coloured left accent bar */}
                 <div
                   className="absolute left-0 top-5 bottom-5 w-0.5 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: labelAccent[label] ?? labelAccent["Professional"] }}
+                  style={{ background: labelAccent[label] ?? labelAccent["Industry"] }}
                 />
 
                 <CardHeader className="pl-6">
@@ -409,7 +480,7 @@ export default function Projects() {
                 </CardContent>
               </Card>
             ))}
-        </div>
+        </div>{/* end carousel */}
 
         {/* Mini Projects */}
         <div className="mt-16 pt-10 border-t border-border">
