@@ -90,10 +90,10 @@ const projects = [
     label: "Industry",
     role: "built" as const,
     title: "ZootWebAgency",
-    period: "Oct 2026",
-    sortDate: "2026-10",
+    period: "Oct – Nov 2026",
+    sortDate: "2026-11",
     description:
-      "48-page website for the agency — service, industry, and company pages built and deployed to Vercel in two days.",
+      "48-page website for the agency — service, industry, and company pages built and deployed to Vercel in two days, plus a link-in-bio page where every service link opens WhatsApp with a pre-filled message.",
     tech: ["Next.js 15", "TypeScript", "Vercel"],
     demo: "https://zootwebagency.com/",
     image: "/projects/zootwebagency.webp",
@@ -159,19 +159,6 @@ const projects = [
       "Service planning site for the agency — built and deployed in days, paired with a PDF brochure of every service offered.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://zoot-service-planner.vercel.app/",
-    repo: null,
-  },
-  {
-    label: "Industry",
-    role: "built" as const,
-    title: "Zoot Link Tree",
-    period: "Nov 2026",
-    sortDate: "2026-11",
-    description:
-      "Link-in-bio page on the ZootWebAgency site listing every agency service — each link opens WhatsApp with a message pre-filled for that service.",
-    tech: ["Next.js 15", "TypeScript"],
-    demo: "https://zootwebagency.com/links/",
-    image: "/projects/zoot-link-tree.webp",
     repo: null,
   },
   {

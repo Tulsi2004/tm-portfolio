@@ -68,7 +68,7 @@ export default function Hero() {
 
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
           <Button asChild size="lg" className="font-body text-xs tracking-[0.2em] uppercase rounded">
-            <a href="https://drive.google.com/drive/folders/1vcghAbkscV3LeV0McGVw_j41WwUGYK-7?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a href="/TULSIMANI_KUMAR_Resume.pdf" download>Resume ↓</a>
           </Button>
           <Button asChild variant="outline" size="lg" className="font-body text-xs tracking-[0.2em] uppercase rounded">
             <a href="https://github.com/tulsi2004" target="_blank" rel="noopener noreferrer">GitHub</a>
