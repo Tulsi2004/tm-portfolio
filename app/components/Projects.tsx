@@ -13,7 +13,7 @@ const projects = [
     role: "built" as const,
     title: "Tenon",
     period: "Oct 2026 – Nov 2026",
-    sortDate: "2026-11",
+    sortDate: "2026-10",
     description:
       "Freelance services marketplace built in phases from scratch — gig listings, buyer–seller chat tied to each gig, seller profiles and reviews, direct Stripe payments without an escrow middleman, and Redis-backed caching.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Redis", "Stripe"],
@@ -26,7 +26,7 @@ const projects = [
     role: "built" as const,
     title: "Local Citation Network",
     period: "Oct 2026 – Nov 2026",
-    sortDate: "2026-11",
+    sortDate: "2026-10",
     description:
       "Network of 100+ local business directory sites sharing one database of listings and reviews — generated, built, and deployed in batches with custom domains on Coolify, plus a companion app to manage site credentials and batch data splits.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Coolify"],
@@ -52,7 +52,7 @@ const projects = [
     role: "built" as const,
     title: "Real Estate Lead-Gen Suite",
     period: "Jul 2026 – Sep 2026",
-    sortDate: "2026-09",
+    sortDate: "2026-07",
     description:
       "Six high-conversion real estate landing pages, each with its own admin panel — lead capture with validation, session replay and analytics, Telegram lead alerts, and a Claude-powered assistant, tuned for page speed on paid traffic.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Claude API", "Telegram Bot API"],
@@ -78,7 +78,7 @@ const projects = [
     role: "built" as const,
     title: "Lusso Executive",
     period: "Jun 2026 – Jul 2026",
-    sortDate: "2026-07",
+    sortDate: "2026-06",
     description:
       "Website for a UK executive taxi service — location pages with per-page FAQs, contact flows, and social links, iterated on client feedback and later migrated from HTML to Next.js.",
     tech: ["Next.js 15", "HTML", "CSS", "JavaScript"],
@@ -91,7 +91,7 @@ const projects = [
     role: "built" as const,
     title: "ZootWebAgency",
     period: "Oct – Nov 2026",
-    sortDate: "2026-11",
+    sortDate: "2026-10",
     description:
       "48-page website for the agency — service, industry, and company pages built and deployed to Vercel in two days, plus a link-in-bio page where every service link opens WhatsApp with a pre-filled message.",
     tech: ["Next.js 15", "TypeScript", "Vercel"],
@@ -216,7 +216,7 @@ const projects = [
     role: "contributing" as const,
     title: "Internal Linking Microservice",
     period: "Apr 2026 – May 2026",
-    sortDate: "2026-05",
+    sortDate: "2026-04",
     description:
       "Microservice that crawls a site and maps its internal links — tested the API, made its logs readable, documented the API and schema, added forced recrawls that bypass the cache, and deployed the backend on a VPS via Coolify.",
     tech: ["Next.js 15", "TypeScript", "Node.js", "D3.js", "Coolify"],
@@ -253,7 +253,7 @@ const projects = [
     role: "built" as const,
     title: "Dev Config Manager",
     period: "Apr 2026 – May 2026",
-    sortDate: "2026-05",
+    sortDate: "2026-04",
     description:
       "Centralised platform to organise project credentials, environment variables, and setup docs — public/private projects, key management, email OTP auth, copyable code docs, and light/dark themes.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Clerk", "Nodemailer", "Radix UI"],
@@ -266,7 +266,7 @@ const projects = [
     role: "built" as const,
     title: "Fiverr Page Hider Extension",
     period: "Mar 2026 – May 2026",
-    sortDate: "2026-05",
+    sortDate: "2026-03",
     description:
       "Chrome extension that lets admins control what employees see in a shared Fiverr workspace — hides earnings and pages, grants temporary access, and logs activity to an audit dashboard. Published on the Chrome Web Store.",
     tech: ["JavaScript", "Chrome Extension API", "Node.js", "PostgreSQL", "Coolify"],
@@ -304,7 +304,7 @@ const projects = [
     role: "built" as const,
     title: "Talent Corner JobPortal",
     period: "Sep 2025 – Jan 2026",
-    sortDate: "2026-01",
+    sortDate: "2025-09",
     description:
       "Full-stack job portal built solo — applications with status tracking, interview scheduling, recruiter–candidate messaging, CV search, resumes on Google Cloud Storage, an admin panel, and throttled Gmail API campaigns that reached ~2,000 candidates.",
     tech: ["React", "Node.js", "Express.js", "MySQL", "JWT", "Google Cloud Storage"],
@@ -317,7 +317,7 @@ const projects = [
     role: "built" as const,
     title: "Growbit",
     period: "Jun 2025 – Aug 2025",
-    sortDate: "2025-08",
+    sortDate: "2025-06",
     description:
       "Investment portfolio management system for a fintech team — led a team of four, covering banks, stocks, mutual funds, PPF, insurance, property, and taxation modules with reports and PDF exports, deployed on Render.",
     tech: ["React", "Node.js", "Express.js", "MySQL", "Vite"],
@@ -330,7 +330,7 @@ const projects = [
     role: "built" as const,
     title: "Capital Need Analysis",
     period: "May 2025 – Aug 2025",
-    sortDate: "2025-07",
+    sortDate: "2025-05",
     description:
       "Financial planning tool for fresh investors, families, and senior citizens — dynamic need-analysis forms with projections, calculations, comparison studies, and PDF report generation.",
     tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MySQL"],
@@ -342,7 +342,7 @@ const projects = [
     role: "contributing" as const,
     title: "Saarthi360",
     period: "May 2025 – Jun 2025",
-    sortDate: "2025-06",
+    sortDate: "2025-05",
     description:
       "Business operations platform for enterprise teams — built franchisee, revenue, recruitment, and legal-contract reports and the Goal Setter module, driven by master data from a Node.js/MySQL backend.",
     tech: ["React", "Node.js", "Express.js", "MySQL"],
@@ -354,7 +354,7 @@ const projects = [
     role: "built" as const,
     title: "Clothify",
     period: "Dec 2024 – Mar 2025",
-    sortDate: "2025-03",
+    sortDate: "2024-12",
     description:
       "Clothing e-commerce platform built for a college project — products browse into a persistent cart, orders flow through authentication-gated management, and Stripe handles payments end to end.",
     tech: ["React", "Node.js", "Express.js", "MongoDB Atlas", "Stripe"],
@@ -366,7 +366,7 @@ const projects = [
     role: "built" as const,
     title: "STVBinge",
     period: "Sep 2024 – Nov 2024",
-    sortDate: "2024-11",
+    sortDate: "2024-09",
     description:
       "Movie ticket booking platform built for a college project — led a team of three, delivering real-time seat availability, role-based access for users and admins, and end-to-end booking flows.",
     tech: ["React", "Node.js", "Express.js", "MongoDB"],
@@ -391,7 +391,7 @@ const projects = [
     role: "built" as const,
     title: "TULSI",
     period: "Aug 2026 – Sep 2026",
-    sortDate: "2026-09",
+    sortDate: "2026-08",
     description:
       "Brand site for TULSI, my vertical SaaS company — a products page for its apps, English, Hindi, Marathi, and Tamil translations with accessibility support, OpenGraph, robots and sitemap SEO, and an admin panel.",
     tech: ["Next.js 16", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
@@ -405,7 +405,7 @@ const projects = [
     role: "built" as const,
     title: "Academy OS",
     period: "Aug 2026 – Ongoing",
-    sortDate: "0000-00",
+    sortDate: "2026-08",
     description:
       "TULSI's first product — multi-tenant SaaS for dance, music, and arts academies, built around how a real academy runs. Enquiries and admissions, role-based auth, batches, and fees replace Excel sheets, WhatsApp threads, and paper registers. Ships with its own multilingual landing site.",
     tech: ["Next.js 16", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Clerk", "Shadcn UI"],
