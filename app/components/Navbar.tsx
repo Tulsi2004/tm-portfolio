@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import TulsiLogo from "./TulsiLogo";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -29,8 +30,9 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="font-heading text-2xl font-semibold text-primary tracking-widest">
-          TK
+        <a href="#" className="flex items-center gap-2.5 font-heading text-xl font-semibold text-primary tracking-widest">
+          <TulsiLogo className="size-8" />
+          TULSI
         </a>
 
         {/* Desktop */}

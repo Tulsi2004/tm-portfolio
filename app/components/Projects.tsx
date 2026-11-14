@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
 import SectionHeader from "./SectionHeader";
+import TulsiLogo from "./TulsiLogo";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -16,6 +18,7 @@ const projects = [
       "Freelance services marketplace built in phases from scratch — gig listings, buyer–seller chat tied to each gig, seller profiles and reviews, direct Stripe payments without an escrow middleman, and Redis-backed caching.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Redis", "Stripe"],
     demo: "https://www.tenonegig.com/",
+    image: "/projects/tenon.webp",
     repo: null,
   },
   {
@@ -27,7 +30,8 @@ const projects = [
     description:
       "Network of 100+ local business directory sites sharing one database of listings and reviews — generated, built, and deployed in batches with custom domains on Coolify, plus a companion app to manage site credentials and batch data splits.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Coolify"],
-    demo: "https://neighborhoodproslist.com",
+    demo: "https://servicehubnearby.com/",
+    image: "/projects/local-citation-network.webp",
     repo: null,
   },
   {
@@ -40,6 +44,7 @@ const projects = [
       "Mobile-first careers portal — candidates apply through a shareable form, and recruiters track each application with statuses, call logs, and notes. Reused as the base for a second company's careers site.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://careers.zootcloud.com/",
+    image: "/projects/zoot-careers.webp",
     repo: null,
   },
   {
@@ -52,6 +57,7 @@ const projects = [
       "Six high-conversion real estate landing pages, each with its own admin panel — lead capture with validation, session replay and analytics, Telegram lead alerts, and a Claude-powered assistant, tuned for page speed on paid traffic.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Claude API", "Telegram Bot API"],
     demo: "https://tangent.nobrokerss.com/",
+    image: "/projects/real-estate-lead-gen-suite.webp",
     repo: null,
   },
   {
@@ -64,6 +70,7 @@ const projects = [
       "Animated automotive showcase website — scroll-driven motion and rich visuals, designed, built, and deployed in two days.",
     tech: ["Next.js 15", "TypeScript", "Vercel"],
     demo: "https://custom-cars-ten.vercel.app/",
+    image: "/projects/custom-cars.webp",
     repo: null,
   },
   {
@@ -76,6 +83,7 @@ const projects = [
       "Website for a UK executive taxi service — location pages with per-page FAQs, contact flows, and social links, iterated on client feedback and later migrated from HTML to Next.js.",
     tech: ["Next.js 15", "HTML", "CSS", "JavaScript"],
     demo: "https://www.lussoexecutive.co.uk/",
+    image: "/projects/lusso-executive.webp",
     repo: null,
   },
   {
@@ -88,6 +96,7 @@ const projects = [
       "48-page website for the agency — service, industry, and company pages built and deployed to Vercel in two days.",
     tech: ["Next.js 15", "TypeScript", "Vercel"],
     demo: "https://zootwebagency.com/",
+    image: "/projects/zootwebagency.webp",
     repo: null,
   },
   {
@@ -100,6 +109,7 @@ const projects = [
       "Lead-generation agency website — designed, redesigned, and deployed the landing page, then added a backend and database to capture incoming leads.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://leadsonus.vercel.app/",
+    image: "/projects/leadsonus.webp",
     repo: null,
   },
   {
@@ -124,6 +134,7 @@ const projects = [
       "Careers portal for a second company, built on the Zoot Careers base — application form, candidate statuses, and recruiter notes.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://cpl-career.vercel.app/",
+    image: "/projects/cpl-careers.webp",
     repo: null,
   },
   {
@@ -157,9 +168,10 @@ const projects = [
     period: "Nov 2026",
     sortDate: "2026-11",
     description:
-      "Link-in-bio page listing every agency service — each link opens WhatsApp with a bot pre-loaded for that service.",
+      "Link-in-bio page on the ZootWebAgency site listing every agency service — each link opens WhatsApp with a message pre-filled for that service.",
     tech: ["Next.js 15", "TypeScript"],
-    demo: null,
+    demo: "https://zootwebagency.com/links/",
+    image: "/projects/zoot-link-tree.webp",
     repo: null,
   },
   {
@@ -176,18 +188,6 @@ const projects = [
   },
   {
     label: "Industry",
-    role: "built" as const,
-    title: "Dhandaa AI",
-    period: "Oct 2026",
-    sortDate: "2026-10",
-    description:
-      "Research and scoping for Dhandaa AI, an AI product for businesses — evaluated the approach and feasibility ahead of development.",
-    tech: ["Next.js 15", "TypeScript"],
-    demo: null,
-    repo: null,
-  },
-  {
-    label: "Industry",
     role: "contributing" as const,
     title: "Website Audit Tools",
     period: "May 2026",
@@ -196,6 +196,7 @@ const projects = [
       "Website audit platform — integrated the internal linking microservice and rebuilt the internal link graph section with real-time updates while the crawler runs.",
     tech: ["Next.js 15", "TypeScript", "D3.js", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://www.websiteaudittools.com/",
+    image: "/projects/website-audit-tools.webp",
     repo: null,
   },
   {
@@ -208,6 +209,7 @@ const projects = [
       "White-labelled edition of Local Rank Reports for a second department — rebranded as MrReports with its own colour scheme, Clerk project, and Vercel deployment.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Clerk"],
     demo: "https://marketingreports.co/",
+    image: "/projects/lora-kp.webp",
     repo: null,
   },
   {
@@ -244,6 +246,7 @@ const projects = [
       "Free SEO toolkit — built the rank tracker, competitor analysis, internal link analysis, Google Maps grid tracker, and AEO/GEO audit, plus ad landing pages, schema markup, GTM funnel tracking, and a companion mobile app.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://freeserp.com",
+    image: "/projects/freeserp.webp",
     repo: null,
   },
   {
@@ -267,7 +270,8 @@ const projects = [
     description:
       "Centralised platform to organise project credentials, environment variables, and setup docs — public/private projects, key management, email OTP auth, copyable code docs, and light/dark themes.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Clerk", "Nodemailer", "Radix UI"],
-    demo: "https://devconfig-manager.vercel.app",
+    demo: "https://dev-config-manager.vercel.app/",
+    image: "/projects/dev-config-manager.webp",
     repo: null,
   },
   {
@@ -280,6 +284,7 @@ const projects = [
       "Chrome extension that lets admins control what employees see in a shared Fiverr workspace — hides earnings and pages, grants temporary access, and logs activity to an audit dashboard. Published on the Chrome Web Store.",
     tech: ["JavaScript", "Chrome Extension API", "Node.js", "PostgreSQL", "Coolify"],
     demo: "https://chromewebstore.google.com/detail/melfdbdpfbdocahbpeedgelenpkpnemi",
+    image: "/projects/fiverr-page-hider-extension.webp",
     repo: null,
   },
   {
@@ -304,6 +309,7 @@ const projects = [
       "Local SEO reporting platform — built the rank tracker frontend, map citation reports, and history search, and added an AEO tool, helping users track local search rankings across locations.",
     tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
     demo: "https://www.localrankreports.com",
+    image: "/projects/local-rank-reports.webp",
     repo: null,
   },
   {
@@ -316,6 +322,7 @@ const projects = [
       "Full-stack job portal built solo — applications with status tracking, interview scheduling, recruiter–candidate messaging, CV search, resumes on Google Cloud Storage, an admin panel, and throttled Gmail API campaigns that reached ~2,000 candidates.",
     tech: ["React", "Node.js", "Express.js", "MySQL", "JWT", "Google Cloud Storage"],
     demo: "https://jobportal-talentcor.vercel.app",
+    image: "/projects/talent-corner-jobportal.webp",
     repo: null,
   },
   {
@@ -328,6 +335,7 @@ const projects = [
       "Investment portfolio management system for a fintech team — led a team of four, covering banks, stocks, mutual funds, PPF, insurance, property, and taxation modules with reports and PDF exports, deployed on Render.",
     tech: ["React", "Node.js", "Express.js", "MySQL", "Vite"],
     demo: "https://investment-frontend-eight.vercel.app",
+    image: "/projects/growbit.webp",
     repo: null,
   },
   {
@@ -389,18 +397,36 @@ const projects = [
     tech: ["Next.js 16", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Clerk", "Claude API", "TanStack Query"],
     demo: null,
     repo: null,
+    tulsi: true,
+  },
+  {
+    label: "Personal",
+    role: "built" as const,
+    title: "TULSI",
+    period: "Aug 2026 – Sep 2026",
+    sortDate: "2026-09",
+    description:
+      "Brand site for TULSI, my vertical SaaS company — a products page for its apps, English, Hindi, Marathi, and Tamil translations with accessibility support, OpenGraph, robots and sitemap SEO, and an admin panel.",
+    tech: ["Next.js 16", "TypeScript", "PostgreSQL", "Prisma", "Supabase"],
+    demo: "https://tulsi-solutions.vercel.app/",
+    image: "/projects/tulsi.webp",
+    repo: null,
+    tulsi: true,
   },
   {
     label: "In Progress",
     role: "built" as const,
-    title: "Performing Arts Management System",
-    period: "Mar 2026 – Ongoing",
+    title: "Academy OS",
+    period: "Aug 2026 – Ongoing",
     sortDate: "0000-00",
     description:
-      "Platform to run a Bharatanatyam academy — enquiry management, role-based Clerk auth, batches, fees, and performance records, fronted by a multilingual landing site (English, Hindi, Marathi, Tamil).",
-    tech: ["Next.js", "TypeScript", "Supabase", "Prisma", "Clerk", "Shadcn UI"],
-    demo: null,
+      "TULSI's first product — multi-tenant SaaS for dance, music, and arts academies, built around how a real academy runs. Enquiries and admissions, role-based auth, batches, and fees replace Excel sheets, WhatsApp threads, and paper registers. Ships with its own multilingual landing site.",
+    tech: ["Next.js 16", "TypeScript", "PostgreSQL", "Prisma", "Supabase", "Clerk", "Shadcn UI"],
+    demo: "https://academy-os-landing.vercel.app/",
+    image: "/projects/academy-os.webp",
+    app: "https://academy-os-beta.vercel.app/",
     repo: null,
+    tulsi: true,
   },
 ].sort((a, b) => b.sortDate.localeCompare(a.sortDate));
 
@@ -462,6 +488,13 @@ export default function Projects() {
   const pauseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [filter, setFilter] = useState<Filter>("All");
   const [sort, setSort] = useState<Sort>("newest");
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [preview, setPreview] = useState<{ title: string; image: string } | null>(null);
+
+  const openPreview = (title: string, image: string) => {
+    setPreview({ title, image });
+    dialogRef.current?.showModal();
+  };
 
   const visible = projects
     .filter((p) => filter === "All" || p.label === filter)
@@ -621,15 +654,49 @@ export default function Projects() {
         {/* Cards carousel */}
         <div
           ref={scrollRef}
+          onMouseEnter={stopAuto}
+          onMouseLeave={startAuto}
           className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {visible.map(({ label, role, title, period, description, tech, demo, repo }, i) => (
+          {visible.map(({ label, role, title, period, description, tech, demo, repo, image, tulsi, app }, i) => (
               <Card
                 key={title}
                 data-card
                 style={{ transitionDelay: `${(i % 3) * 100}ms` }}
-                className="flex-none w-[min(calc(100vw-3.5rem),22rem)] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] snap-start group relative flex flex-col hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_4px_22px_rgba(166,124,82,0.14)] border-border"
+                className="flex-none w-[min(calc(100vw-3.5rem),22rem)] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] snap-start group relative flex flex-col overflow-hidden hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_4px_22px_rgba(166,124,82,0.14)] border-border"
               >
+                {/* Screenshot: scrolls down the page on hover, opens full size on click */}
+                {image ? (
+                  <button
+                    type="button"
+                    onClick={() => openPreview(title, image)}
+                    aria-label={`View ${title} screenshot`}
+                    className="group/shot relative block aspect-[16/10] w-full overflow-hidden border-b border-border bg-muted cursor-zoom-in"
+                  >
+                    <Image
+                      src={image}
+                      alt={`${title} screenshot`}
+                      fill
+                      sizes="(min-width: 1024px) 22rem, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover object-top transition-[object-position] duration-[4000ms] ease-in-out group-hover/shot:object-bottom"
+                    />
+                  </button>
+                ) : (
+                  <div
+                    className="relative flex aspect-[16/10] w-full flex-col items-center justify-center gap-3 border-b border-border bg-muted px-6"
+                    style={{
+                      backgroundImage: "radial-gradient(circle, rgba(166, 124, 82, 0.18) 1px, transparent 1px)",
+                      backgroundSize: "20px 20px",
+                    }}
+                  >
+                    {tulsi && <TulsiLogo className="size-14 shadow-md rounded-[14px]" />}
+                    <span className="font-heading italic text-2xl text-primary/70 text-center leading-snug">
+                      {title}
+                    </span>
+                  </div>
+                )}
+
+                <div className="relative flex flex-col flex-1">
                 {/* Label-coloured left accent bar */}
                 <div
                   className="absolute left-0 top-5 bottom-5 w-0.5 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"
@@ -703,12 +770,52 @@ export default function Projects() {
                           GitHub ↗
                         </a>
                       )}
+                      {app && (
+                        <a href={app} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-blue-700 font-medium hover:text-blue-800 transition-colors duration-200">
+                          App ↗
+                        </a>
+                      )}
                     </div>
                   )}
                 </CardContent>
+                </div>
               </Card>
             ))}
         </div>{/* end carousel */}
+
+        {/* Full-size screenshot viewer */}
+        <dialog
+          ref={dialogRef}
+          onClose={() => setPreview(null)}
+          onClick={(e) => e.target === e.currentTarget && dialogRef.current?.close()}
+          className="m-auto w-[min(100vw-2rem,64rem)] max-h-[90vh] rounded-lg border border-border bg-card p-0 shadow-2xl backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+        >
+          {preview && (
+            <div className="flex max-h-[90vh] flex-col">
+              <div className="flex items-center justify-between border-b border-border px-5 py-3">
+                <span className="font-heading text-lg font-semibold">{preview.title}</span>
+                <button
+                  type="button"
+                  onClick={() => dialogRef.current?.close()}
+                  aria-label="Close"
+                  className="w-8 h-8 flex items-center justify-center border border-border rounded-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors duration-200"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="overflow-y-auto">
+                <Image
+                  src={preview.image}
+                  alt={`${preview.title} full screenshot`}
+                  width={1200}
+                  height={3600}
+                  sizes="(min-width: 1024px) 64rem, 100vw"
+                  className="block h-auto w-full"
+                />
+              </div>
+            </div>
+          )}
+        </dialog>
 
         {/* Mini Projects */}
         <div className="mt-16 pt-10 border-t border-border">
