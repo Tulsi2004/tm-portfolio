@@ -56,7 +56,7 @@ export default function Skills() {
           {skillGroups.map(({ category, skills }) => (
             <div
               key={category}
-              className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-10 gap-y-1 py-5"
+              className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-10 gap-y-1 py-5 reveal"
             >
               <span className="font-heading text-sm font-semibold text-primary pt-0.5">
                 {category}

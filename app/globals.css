@@ -69,6 +69,59 @@
   --font-body:    var(--font-libre-baskerville);
 }
 
+/* ================================================================
+   MOTION — Tailwind animations: `animate-blur-in`, `animate-marquee`
+   ================================================================ */
+@theme {
+  --animate-blur-in: blur-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes blur-in {
+    from {
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* `reveal`: blurs in once, the first time the element scrolls into view.
+   RevealObserver adds `data-shown`; the transition always runs to the end,
+   so content never sits half-blurred wherever the scroll stops. */
+@utility reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  &[data-shown] {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
+
 *, ::after, ::before, ::backdrop {
   border-color: var(--border);
 }

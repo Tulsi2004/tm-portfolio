@@ -14,7 +14,7 @@ export default function About() {
       <div className="max-w-5xl mx-auto">
         <SectionHeader number="01" title="About Me" />
 
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start reveal">
           {/* Bio */}
           <div>
             <p className="font-body text-foreground leading-8 text-base mb-6">

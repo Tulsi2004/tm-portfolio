@@ -127,7 +127,7 @@ export default function Experience() {
 
           <div className="space-y-16">
             {companies.map(({ org, location, type, duration, roles }, ci) => (
-              <div key={ci} className="md:pl-10 relative group">
+              <div key={ci} className="md:pl-10 relative group reveal">
                 {/* Timeline dot */}
                 <div
                   className="absolute left-0 top-2 w-2 h-2 rounded-full -translate-x-1/2 hidden md:block border border-primary/60"

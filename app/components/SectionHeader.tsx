@@ -6,7 +6,7 @@ interface Props {
 
 export default function SectionHeader({ number, title, subtitle }: Props) {
   return (
-    <div className="mb-16">
+    <div className="mb-16 reveal">
       {/* Decorative number — stacked above title, faint primary tint */}
       <p
         aria-hidden

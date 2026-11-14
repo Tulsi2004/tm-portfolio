@@ -27,31 +27,32 @@ export default function Hero() {
       <div className="min-h-[calc(100vh-7rem)] flex flex-col items-center justify-center text-center">
         {/* Name */}
         <h1 className="font-heading font-light leading-[0.88] tracking-tight mb-4">
-          <span className="block text-5xl sm:text-8xl lg:text-[9.5rem] text-foreground">
+          <span className="block text-5xl sm:text-8xl lg:text-[9.5rem] text-foreground animate-blur-in [animation-delay:100ms] motion-reduce:animate-none">
             Tulsimani
           </span>
-          <span className="block text-5xl sm:text-8xl lg:text-[9.5rem] italic text-primary">
+          <span className="block text-5xl sm:text-8xl lg:text-[9.5rem] italic text-primary animate-blur-in [animation-delay:400ms] motion-reduce:animate-none">
             Kumar
           </span>
         </h1>
 
         {/* Ornamental divider */}
-        <div className="flex items-center justify-center gap-4 my-8">
+        <div className="flex items-center justify-center gap-4 my-8 animate-blur-in [animation-delay:750ms] motion-reduce:animate-none">
           <div className="h-px w-14 bg-primary/40" />
           <span className="font-heading text-primary/50 text-sm select-none">◆</span>
           <div className="h-px w-14 bg-primary/40" />
         </div>
 
-        {/* Role pills */}
+        {/* Role pills — blur in one after another */}
         <div className="flex flex-wrap justify-center gap-2.5">
           {[
             "Full Stack Developer",
             "Bharatanatyam Performer",
             "MS Aspirant · South Korea",
-          ].map((role) => (
+          ].map((role, i) => (
             <span
               key={role}
-              className="font-body text-[11px] text-muted-foreground border border-border bg-card px-4 py-1.5 rounded-full tracking-wide"
+              style={{ animationDelay: `${950 + i * 150}ms` }}
+              className="font-body text-[11px] text-muted-foreground border border-border bg-card px-4 py-1.5 rounded-full tracking-wide animate-blur-in motion-reduce:animate-none"
             >
               {role}
             </span>
@@ -59,8 +60,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Below fold — visible on scroll */}
-      <div className="flex flex-col items-center text-center pt-20 pb-24">
+      {/* Below fold — blurs in as you scroll to it */}
+      <div className="flex flex-col items-center text-center pt-20 pb-24 reveal">
         <p className="font-heading italic font-light text-xl sm:text-2xl text-muted-foreground max-w-sm mx-auto mb-12 leading-relaxed">
           Where logic meets expression.
         </p>

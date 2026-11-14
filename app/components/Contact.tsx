@@ -39,7 +39,7 @@ export default function Contact() {
           subtitle="Whether it's a project, a conversation, or just a hello — I'm always open to connecting."
         />
 
-        <div className="grid md:grid-cols-2 gap-14 lg:gap-20">
+        <div className="grid md:grid-cols-2 gap-14 lg:gap-20 reveal">
           {/* Links + quote */}
           <div>
             <p className="font-body text-[10px] text-muted-foreground tracking-[0.3em] uppercase mb-7">
@@ -119,6 +119,25 @@ export default function Contact() {
               )}
             </form>
           </div>
+        </div>
+      </div>
+
+      {/* "Let's connect" marquee — two identical halves, slid by -50% for a seamless loop */}
+      <div aria-hidden className="mt-24 -mx-6 -mb-16 md:-mb-28 overflow-hidden border-t border-border py-8 md:py-12 select-none">
+        <div className="flex w-max animate-marquee motion-reduce:animate-none hover:[animation-play-state:paused]">
+          {[0, 1].map((half) => (
+            <div key={half} className="flex shrink-0">
+              {[0, 1, 2, 3].map((i) => (
+                <span
+                  key={i}
+                  className="flex items-center gap-10 pr-10 md:gap-16 md:pr-16 whitespace-nowrap font-heading italic font-light text-6xl md:text-8xl lg:text-9xl text-primary/80"
+                >
+                  Let&apos;s connect
+                  <span className="not-italic text-2xl md:text-4xl text-primary/35">◆</span>
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>
