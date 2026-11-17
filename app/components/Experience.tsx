@@ -112,44 +112,54 @@ const companies = [
   },
 ];
 
+// Header colour per company card, cycling.
+const accents = ["#7ec8f2", "#f6b3c6", "#f5cf5c", "#c9b8f0"];
+
 export default function Experience() {
   return (
-    <section id="experience" className="py-16 md:py-28 px-6 bg-background">
+    <section
+      id="experience"
+      className="py-16 md:py-28 px-6 bg-background"
+      style={{
+        backgroundImage: "radial-gradient(circle, rgba(31, 26, 23, 0.1) 1px, transparent 1px)",
+        backgroundSize: "28px 28px",
+      }}
+    >
       <div className="max-w-5xl mx-auto">
         <SectionHeader number="04" title="Experience" />
 
         <div className="relative">
           {/* Timeline track */}
-          <div
-            className="absolute left-0 top-3 bottom-3 w-px hidden md:block"
-            style={{ background: "linear-gradient(to bottom, #a67c52, rgba(166, 124, 82, 0.08))" }}
-          />
+          <div className="absolute left-0 top-8 bottom-8 w-0.5 hidden md:block bg-[#1f1a17]" />
 
-          <div className="space-y-16">
+          <div className="space-y-12">
             {companies.map(({ org, location, type, duration, roles }, ci) => (
-              <div key={ci} className="md:pl-10 relative group reveal">
+              <div key={ci} className="md:ml-10 relative group reveal">
                 {/* Timeline dot */}
                 <div
-                  className="absolute left-0 top-2 w-2 h-2 rounded-full -translate-x-1/2 hidden md:block border border-primary/60"
-                  style={{ background: "#f5f1e6" }}
+                  className="absolute -left-10 top-7 size-4 rounded-full -translate-x-1/2 hidden md:block border-2 border-[#1f1a17]"
+                  style={{ background: accents[ci % accents.length] }}
                 />
 
-                {/* Company meta */}
+                <div className="rounded-3xl border-2 border-[#1f1a17] bg-[#fffcf5] shadow-[6px_6px_0_0_#1f1a17] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1">
+                {/* Company meta — coloured header */}
+                <div className="px-6 md:px-8 pt-6 pb-5 border-b-2 border-[#1f1a17] text-[#1f1a17]" style={{ background: accents[ci % accents.length] }}>
                 <div className="flex flex-wrap items-center gap-3 mb-1">
-                  <span className="font-body text-[10px] text-muted-foreground tracking-[0.25em] uppercase">
+                  <span className="font-body text-[10px] tracking-[0.25em] uppercase">
                     {duration}
                   </span>
-                  <Badge variant="outline" className="font-body text-[10px] text-primary border-primary/30 px-2 py-0">
+                  <Badge variant="outline" className="font-body text-[10px] text-[#1f1a17] border-[#1f1a17] bg-[#fffcf5] rounded-full px-2.5 py-0">
                     {type}
                   </Badge>
                 </div>
-                <h3 className="font-heading text-2xl sm:text-3xl font-medium text-foreground mb-0.5">
+                <h3 className="font-heading text-2xl sm:text-3xl font-semibold mb-0.5">
                   {org}
                 </h3>
-                <p className="font-body text-sm text-muted-foreground mb-6">{location}</p>
+                <p className="font-body text-sm opacity-75">{location}</p>
+                </div>
 
                 {/* Roles */}
-                <div className={`space-y-8 ${roles.length > 1 ? "border-l border-border pl-5" : ""}`}>
+                <div className={`p-6 md:p-8 space-y-8 ${roles.length > 1 ? "[&>div+div]:border-t-2 [&>div+div]:border-dashed [&>div+div]:border-[#1f1a17]/20 [&>div+div]:pt-8" : ""}`}>
                   {roles.map(({ role, period, bullets, tech }, ri) => (
                     <div key={ri}>
                       {roles.length > 1 && period && (
@@ -187,37 +197,44 @@ export default function Experience() {
                     </div>
                   ))}
                 </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
         {/* Education */}
-        <div className="mt-20 pt-10 border-t border-border">
+        <div className="mt-20">
           <p className="font-body text-[10px] text-muted-foreground tracking-[0.3em] uppercase mb-8">
             Education
           </p>
-          <div className="divide-y divide-border">
-            {education.map(({ institution, degree, period, grade, activities }) => (
-              <div key={institution} className="py-5 grid md:grid-cols-[1fr_auto] gap-2">
-                <div>
-                  <h4 className="font-heading text-lg font-medium text-foreground mb-0.5">
+          <div className="grid md:grid-cols-3 gap-5">
+            {education.map(({ institution, degree, period, grade, activities }, ei) => (
+              <div
+                key={institution}
+                className="flex flex-col overflow-hidden rounded-3xl border-2 border-[#1f1a17] bg-[#fffcf5] text-[#1f1a17] shadow-[5px_5px_0_0_#1f1a17] transition-transform duration-200 hover:-translate-y-1 hover:rotate-1"
+              >
+                <div className="h-3 shrink-0 border-b-2 border-[#1f1a17]" style={{ background: accents[(ei + 2) % accents.length] }} />
+                <div className="flex flex-1 flex-col gap-6 p-6">
+                  <div>
+                  <h4 className="font-heading text-lg font-semibold leading-snug">
                     {institution}
                   </h4>
-                  <p className="font-body text-sm text-muted-foreground mb-1">{degree}</p>
+                  <p className="mt-1 font-body text-sm text-[#1f1a17]/70">{degree}</p>
                   {activities && (
-                    <p className="font-body text-[11px] text-muted-foreground/70">
+                    <p className="mt-1 font-body text-[11px] text-[#1f1a17]/55">
                       {activities}
                     </p>
                   )}
-                </div>
-                <div className="text-left md:text-right shrink-0">
-                  {period && (
-                    <p className="font-body text-[10px] text-muted-foreground tracking-[0.2em] uppercase mb-1">
-                      {period}
+                  </div>
+                  {/* Grade + dates pinned to the bottom so every card lines up */}
+                  {/* One row on mobile; stacked on desktop, with a blank line when there's no period so grades stay level */}
+                  <div className="mt-auto flex flex-wrap items-end justify-between gap-x-3 gap-y-1.5 border-t-2 border-dashed border-[#1f1a17]/20 pt-4 md:flex-col md:items-start">
+                    <p className="font-heading text-2xl font-semibold leading-none">{grade}</p>
+                    <p className={`font-body text-[10px] text-[#1f1a17]/60 tracking-[0.2em] uppercase ${period ? "" : "invisible max-md:hidden"}`}>
+                      {period ?? "—"}
                     </p>
-                  )}
-                  <p className="font-body text-sm text-primary">{grade}</p>
+                  </div>
                 </div>
               </div>
             ))}

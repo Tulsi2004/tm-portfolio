@@ -122,8 +122,91 @@
   }
 }
 
-*, ::after, ::before, ::backdrop {
-  border-color: var(--border);
+/* ================================================================
+   SECTION THEMES — bold colour blocks. Each one re-points the shadcn
+   tokens, so everything inside (text, borders, buttons, badges) follows.
+   Pair with `bg-background text-foreground` on the element.
+   ================================================================ */
+@utility theme-navy {
+  --background: #2c3a75;
+  --foreground: #fcf8ed;
+  --card: #fcf8ed;
+  --card-foreground: #1f1a17;
+  --muted: #34437f;
+  --muted-foreground: rgba(252, 248, 237, 0.72);
+  --primary: #f5cf5c;
+  --primary-foreground: #1f1a17;
+  --border: rgba(252, 248, 237, 0.2);
+}
+@utility theme-butter {
+  --background: #f8e6ad;
+  --foreground: #1f1a17;
+  --muted: #f1d98f;
+  --muted-foreground: rgba(31, 26, 23, 0.7);
+  --primary: #2c3a75;
+  --primary-foreground: #fcf8ed;
+  --border: rgba(31, 26, 23, 0.25);
+}
+@utility theme-ink {
+  --background: #1f1a17;
+  --foreground: #f5f1e6;
+  --card: #2a2420;
+  --card-foreground: #f5f1e6;
+  --popover: #2a2420;
+  --popover-foreground: #f5f1e6;
+  --muted: #2a2420;
+  --muted-foreground: rgba(245, 241, 230, 0.62);
+  --secondary: #3a322c;
+  --secondary-foreground: #f5f1e6;
+  --accent: #3a322c;
+  --accent-foreground: #f5f1e6;
+  --primary: #f5cf5c;
+  --primary-foreground: #1f1a17;
+  --border: rgba(245, 241, 230, 0.14);
+  --input: rgba(245, 241, 230, 0.22);
+  --ring: #f5cf5c;
+}
+@utility theme-rose {
+  --background: #f6b3c6;
+  --foreground: #1f1a17;
+  --muted: #f2a1b8;
+  --muted-foreground: rgba(31, 26, 23, 0.68);
+  --primary: #a62523;
+  --primary-foreground: #fcf8ed;
+  --border: rgba(31, 26, 23, 0.16);
+}
+@utility theme-sky {
+  --background: #7ec8f2;
+  --foreground: #1f1a17;
+  --muted: #6bbbe8;
+  --muted-foreground: rgba(31, 26, 23, 0.7);
+  --primary: #2c3a75;
+  --primary-foreground: #fcf8ed;
+  --border: rgba(31, 26, 23, 0.18);
+}
+
+/* `circle-reveal`: a dark circle that grows to fill the screen while its
+   parent (which names `--reveal` as its view timeline) is pinned. Browsers
+   without scroll timelines just show it full. */
+@keyframes circle-grow {
+  from { clip-path: circle(14% at 50% 50%); }
+  to { clip-path: circle(75% at 50% 50%); }
+}
+@utility circle-reveal {
+  @supports (animation-timeline: view()) {
+    animation: circle-grow linear both;
+    animation-timeline: --reveal;
+    animation-range: contain 0% contain 55%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@layer base {
+  *, ::after, ::before, ::backdrop {
+    border-color: var(--border);
+  }
 }
 
 html {

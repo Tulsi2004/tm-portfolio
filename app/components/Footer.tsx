@@ -1,10 +1,8 @@
-import { Separator } from "@/components/ui/separator";
 import TulsiLogo from "./TulsiLogo";
 
 export default function Footer() {
   return (
-    <footer className="bg-muted/40 py-10 px-6">
-      <Separator className="mb-10 bg-border" />
+    <footer className="theme-navy bg-background text-foreground py-10 px-6">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <span className="flex items-center gap-2 font-heading text-lg text-primary tracking-widest">
           <TulsiLogo className="size-7" />

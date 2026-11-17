@@ -10,8 +10,8 @@ export default function SectionHeader({ number, title, subtitle }: Props) {
       {/* Decorative number — stacked above title, faint primary tint */}
       <p
         aria-hidden
-        className="font-heading font-light leading-none select-none"
-        style={{ fontSize: "4.5rem", color: "rgba(166, 124, 82, 0.25)" }}
+        className="font-heading font-light leading-none select-none text-primary/30"
+        style={{ fontSize: "4.5rem" }}
       >
         {number}
       </p>

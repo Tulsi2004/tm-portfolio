@@ -10,7 +10,7 @@ const highlights = [
 
 export default function About() {
   return (
-    <section id="about" className="py-16 md:py-28 px-6 bg-muted/40">
+    <section id="about" className="theme-rose py-16 md:py-28 px-6 bg-background text-foreground">
       <div className="max-w-5xl mx-auto">
         <SectionHeader number="01" title="About Me" />
 
@@ -41,11 +41,11 @@ export default function About() {
 
           {/* Highlights */}
           <div>
-            <div className="space-y-1">
+            <div className="rounded-3xl border-2 border-foreground bg-[#fcf8ed] px-6 py-2 shadow-[6px_6px_0_0_#1f1a17]">
               {highlights.map(({ label, value }) => (
                 <div
                   key={label}
-                  className="flex items-baseline gap-4 py-4 border-b border-border group"
+                  className="flex items-baseline gap-4 py-4 border-b border-border last:border-b-0 group"
                 >
                   <span className="font-body text-[10px] text-muted-foreground tracking-[0.2em] uppercase w-24 shrink-0">
                     {label}
@@ -64,8 +64,8 @@ export default function About() {
                 { number: "7+", label: "Years of Karate" },
                 { number: "30+", label: "Projects Shipped" },
               ].map(({ number, label }) => (
-                <div key={label}>
-                  <p className="font-heading text-3xl font-semibold text-primary leading-none mb-2">
+                <div key={label} className="rounded-2xl border-2 border-foreground bg-[#fcf8ed] p-4 shadow-[4px_4px_0_0_#1f1a17] transition-transform duration-200 hover:-rotate-2 hover:-translate-y-1">
+                  <p className="font-heading text-4xl font-semibold text-primary leading-none mb-2">
                     {number}
                   </p>
                   <p className="font-body text-[11px] text-muted-foreground leading-snug">

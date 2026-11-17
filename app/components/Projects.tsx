@@ -4,8 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import Image from "next/image";
 import SectionHeader from "./SectionHeader";
 import TulsiLogo from "./TulsiLogo";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 
 const projects = [
   {
@@ -450,19 +449,17 @@ const miniProjects = [
   },
 ];
 
-const labelStyles: Record<string, string> = {
-  Industry:      "text-primary border-primary/50 bg-primary/10",
-  "Academic": "text-muted-foreground border-border bg-muted",
-  Personal:          "text-sky-700 border-sky-400/50 bg-sky-50",
-  "In Progress":     "text-amber-700 border-amber-400/50 bg-amber-50",
+const labelColors: Record<string, string> = {
+  Industry: "#7ec8f2",
+  Academic: "#c9b8f0",
+  Personal: "#f6b3c6",
+  "In Progress": "#f5cf5c",
 };
 
-const labelAccent: Record<string, string> = {
-  Industry:      "linear-gradient(to bottom, #a67c52, rgba(166,124,82,0.12))",
-  "Academic": "linear-gradient(to bottom, #8a9099, rgba(138,144,153,0.12))",
-  "In Progress":     "linear-gradient(to bottom, #b07d2a, rgba(176,125,42,0.12))",
-  Personal:          "linear-gradient(to bottom, #5b8dd9, rgba(91,141,217,0.12))",
-};
+const arrowBtn =
+  "w-10 h-10 grid place-items-center rounded-full border-[1.5px] border-[#1f1a17] bg-[#fcf8ed] text-[#1f1a17] shadow-[2px_2px_0_0_rgba(31,26,23,0.85)] transition-all duration-200 hover:bg-[#1f1a17] hover:text-[#fcf8ed] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none";
+const linkBtn =
+  "font-body text-xs rounded-full border border-[#1f1a17]/60 px-4 py-1.5 transition-colors duration-200 hover:bg-[#1f1a17] hover:text-[#fcf8ed] hover:border-[#1f1a17]";
 
 const FILTERS = ["All", "Industry", "Personal", "Academic", "In Progress"] as const;
 type Filter = (typeof FILTERS)[number];
@@ -576,7 +573,7 @@ export default function Projects() {
   }, [filter, sort]);
 
   return (
-    <section id="projects" className="py-16 md:py-28 px-6 bg-muted/40">
+    <section id="projects" className="theme-butter py-16 md:py-28 px-6 bg-background text-foreground">
       <div className="max-w-5xl mx-auto" ref={containerRef}>
         <SectionHeader number="03" title="Projects" />
 
@@ -586,9 +583,9 @@ export default function Projects() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`font-body text-[11px] tracking-[0.2em] uppercase px-3 py-1.5 border rounded-sm transition-colors duration-200 ${
+              className={`font-body text-[11px] tracking-[0.2em] uppercase px-3.5 py-1.5 border-2 rounded-full transition-colors duration-200 ${
                 filter === f
-                  ? "border-primary/60 text-primary bg-primary/5"
+                  ? "border-[#1f1a17] bg-[#1f1a17] text-[#fcf8ed]"
                   : "border-border text-muted-foreground hover:text-primary hover:border-primary/30"
               }`}
             >
@@ -598,7 +595,7 @@ export default function Projects() {
         </div>
 
         {/* Count + sort + arrows row */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
           <span className="font-body text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
             <span className="text-primary">{visible.length}</span>
             {" "}project{visible.length !== 1 ? "s" : ""}
@@ -609,9 +606,9 @@ export default function Projects() {
                 <button
                   key={s}
                   onClick={() => setSort(s)}
-                  className={`font-body text-[11px] tracking-[0.15em] uppercase px-2.5 py-1 border rounded-sm transition-colors duration-200 ${
+                  className={`font-body text-[11px] tracking-[0.15em] uppercase px-3 py-1 border-2 rounded-full transition-colors duration-200 ${
                     sort === s
-                      ? "border-primary/60 text-primary bg-primary/5"
+                      ? "border-[#1f1a17] bg-[#1f1a17] text-[#fcf8ed]"
                       : "border-border text-muted-foreground hover:text-primary hover:border-primary/30"
                   }`}
                 >
@@ -619,19 +616,11 @@ export default function Projects() {
                 </button>
               ))}
             </div>
-            <div className="flex gap-1.5">
-              <button
-                onClick={() => scrollCarousel("prev")}
-                aria-label="Previous"
-                className="w-8 h-8 flex items-center justify-center border border-border rounded-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors duration-200 text-sm"
-              >
+            <div className="flex gap-2">
+              <button onClick={() => scrollCarousel("prev")} aria-label="Previous" className={arrowBtn}>
                 ←
               </button>
-              <button
-                onClick={() => scrollCarousel("next")}
-                aria-label="Next"
-                className="w-8 h-8 flex items-center justify-center border border-border rounded-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors duration-200 text-sm"
-              >
+              <button onClick={() => scrollCarousel("next")} aria-label="Next" className={arrowBtn}>
                 →
               </button>
             </div>
@@ -643,14 +632,14 @@ export default function Projects() {
           ref={scrollRef}
           onMouseEnter={stopAuto}
           onMouseLeave={startAuto}
-          className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pt-3 pb-6 pl-1 pr-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {visible.map(({ label, role, title, period, description, tech, demo, repo, image, tulsi, app }, i) => (
               <Card
                 key={title}
                 data-card
                 style={{ transitionDelay: `${(i % 3) * 100}ms` }}
-                className="flex-none w-[min(calc(100vw-3.5rem),22rem)] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] snap-start group relative flex flex-col overflow-hidden hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_4px_22px_rgba(166,124,82,0.14)] border-border"
+                className="flex-none w-[min(calc(100vw-3.5rem),22rem)] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] snap-start group relative flex flex-col overflow-hidden rounded-3xl border-[1.5px] border-[#1f1a17] bg-[#fffcf5] shadow-[3px_3px_0_0_rgba(31,26,23,0.85)] transition-all duration-300 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_rgba(31,26,23,0.85)]"
               >
                 {/* Screenshot: scrolls down the page on hover, opens full size on click */}
                 {image ? (
@@ -658,7 +647,7 @@ export default function Projects() {
                     type="button"
                     onClick={() => openPreview(title, image)}
                     aria-label={`View ${title} screenshot`}
-                    className="group/shot relative block aspect-[16/10] w-full overflow-hidden border-b border-border bg-muted cursor-zoom-in"
+                    className="group/shot relative block aspect-[16/10] w-full overflow-hidden border-b-[1.5px] border-[#1f1a17] bg-muted cursor-zoom-in"
                   >
                     <Image
                       src={image}
@@ -670,101 +659,78 @@ export default function Projects() {
                   </button>
                 ) : (
                   <div
-                    className="relative flex aspect-[16/10] w-full flex-col items-center justify-center gap-3 border-b border-border bg-muted px-6"
+                    className="relative flex aspect-[16/10] w-full flex-col items-center justify-center gap-3 border-b-[1.5px] border-[#1f1a17] px-6"
                     style={{
-                      backgroundImage: "radial-gradient(circle, rgba(166, 124, 82, 0.18) 1px, transparent 1px)",
+                      backgroundColor: ["#7ec8f2", "#f6b3c6", "#e8553e", "#c9b8f0"][i % 4],
+                      backgroundImage: "radial-gradient(circle, rgba(31, 26, 23, 0.16) 1px, transparent 1px)",
                       backgroundSize: "20px 20px",
                     }}
                   >
                     {tulsi && <TulsiLogo className="size-14 shadow-md rounded-[14px]" />}
-                    <span className="font-heading italic text-2xl text-primary/70 text-center leading-snug">
+                    <span className="font-heading italic text-2xl text-[#1f1a17] text-center leading-snug">
                       {title}
                     </span>
                   </div>
                 )}
 
-                <div className="relative flex flex-col flex-1">
-                {/* Label-coloured left accent bar */}
-                <div
-                  className="absolute left-0 top-5 bottom-5 w-0.5 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: labelAccent[label] ?? labelAccent["Industry"] }}
-                />
+                {/* Number sticker over the image */}
+                <span className="pointer-events-none absolute left-3 top-3 z-10 grid size-9 place-items-center rounded-full border border-[#1f1a17]/70 bg-[#fcf8ed] font-heading text-xs text-[#1f1a17] shadow-sm">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
 
-                <CardHeader className="pl-6">
-                  <div className="flex items-start justify-between mb-1">
+                <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6 text-[#1f1a17]">
+                  <div className="flex flex-wrap items-center gap-1.5">
                     <span
-                      className="font-heading font-light leading-none"
-                      style={{ fontSize: "4rem", color: "rgba(166, 124, 82, 0.18)" }}
+                      className="rounded-full border border-[#1f1a17]/30 px-2.5 py-0.5 font-body text-[10px] uppercase tracking-wider"
+                      style={{ background: labelColors[label] ?? labelColors.Industry }}
                     >
-                      {String(i + 1).padStart(2, "0")}
+                      {label}
                     </span>
-                    <div className="pt-2 flex flex-col items-end gap-1.5">
-                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                        <Badge
-                          variant="outline"
-                          className={`font-body text-[10px] tracking-wide ${labelStyles[label]}`}
-                        >
-                          {label}
-                        </Badge>
-                        {role === "built" ? (
-                          <Badge
-                            variant="outline"
-                            className="font-body text-[10px] tracking-wide text-foreground border-foreground/40 bg-foreground/[0.06]"
-                          >
-                            Creator
-                          </Badge>
-                        ) : (
-                          <Badge
-                            variant="outline"
-                            className="font-body text-[10px] tracking-wide text-muted-foreground border-dashed border-muted-foreground/40 bg-muted-foreground/[0.06]"
-                          >
-                            Contributor
-                          </Badge>
-                        )}
-                      </div>
-                      {period && (
-                        <span className="font-body text-[10px] text-muted-foreground">
-                          {period}
-                        </span>
-                      )}
-                    </div>
+                    <span
+                      className={`rounded-full border px-2.5 py-0.5 font-body text-[10px] uppercase tracking-wider ${
+                        role === "built" ? "border-[#1f1a17]/40" : "border-dashed border-[#1f1a17]/40"
+                      }`}
+                    >
+                      {role === "built" ? "Creator" : "Contributor"}
+                    </span>
+                    {period && (
+                      <span className="ml-auto font-body text-[11px] text-[#1f1a17]/60">{period}</span>
+                    )}
                   </div>
-                  <CardTitle className="font-heading text-[1.3rem] font-semibold leading-snug">
-                    {title}
-                  </CardTitle>
-                  <CardDescription className="font-body text-sm leading-relaxed">
-                    {description}
-                  </CardDescription>
-                </CardHeader>
 
-                <CardContent className="pl-6 flex flex-col flex-1">
-                  <div className="flex flex-wrap gap-1.5 mb-4">
+                  <h3 className="font-heading text-2xl font-medium leading-tight">{title}</h3>
+                  <p className="font-body text-sm leading-relaxed text-[#1f1a17]/75">{description}</p>
+
+                  <div className="flex flex-wrap gap-1.5 pt-1">
                     {tech.map((t) => (
-                      <Badge key={t} variant="outline" className="font-body text-[11px] text-primary border-primary/30">
+                      <span
+                        key={t}
+                        className="rounded-full border border-[#1f1a17]/25 bg-[#1f1a17]/5 px-2.5 py-0.5 font-body text-[11px]"
+                      >
                         {t}
-                      </Badge>
+                      </span>
                     ))}
                   </div>
-                  {(demo || repo) && (
-                    <div className="flex gap-4 mt-auto pt-4 border-t border-border/50">
+
+                  {(demo || repo || app) && (
+                    <div className="mt-auto flex flex-wrap gap-2 pt-3">
                       {demo && (
-                        <a href={demo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-blue-500 font-medium hover:text-blue-600 transition-colors duration-200">
+                        <a href={demo} target="_blank" rel="noopener noreferrer" className={linkBtn}>
                           Live ↗
                         </a>
                       )}
                       {repo && (
-                        <a href={repo} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-blue-700 font-medium hover:text-blue-800 transition-colors duration-200">
+                        <a href={repo} target="_blank" rel="noopener noreferrer" className={linkBtn}>
                           GitHub ↗
                         </a>
                       )}
                       {app && (
-                        <a href={app} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-blue-700 font-medium hover:text-blue-800 transition-colors duration-200">
+                        <a href={app} target="_blank" rel="noopener noreferrer" className={linkBtn}>
                           App ↗
                         </a>
                       )}
                     </div>
                   )}
-                </CardContent>
                 </div>
               </Card>
             ))}
@@ -805,7 +771,7 @@ export default function Projects() {
         </dialog>
 
         {/* Mini Projects */}
-        <div className="mt-16 pt-10 border-t border-border">
+        <div className="mt-16 pt-10 border-t-2 border-dashed border-[#1f1a17]/30">
           <p className="font-body text-[10px] text-muted-foreground tracking-[0.3em] uppercase mb-6">
             Mini Projects
           </p>
@@ -815,24 +781,24 @@ export default function Projects() {
                 key={title}
                 data-animate
                 style={{ transitionDelay: `${(i % 3) * 90}ms` }}
-                className="bg-card border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-[0_2px_14px_rgba(166,124,82,0.1)] transition-all duration-200"
+                className="rounded-2xl border-[1.5px] border-[#1f1a17] bg-[#fffcf5] p-4 text-[#1f1a17] shadow-[3px_3px_0_0_rgba(31,26,23,0.85)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_rgba(31,26,23,0.85)]"
               >
                 <div className="flex items-start justify-between mb-2">
-                  <h4 className="font-heading text-sm font-semibold text-foreground leading-snug">
+                  <h4 className="font-heading text-base font-semibold leading-snug">
                     {title}
                   </h4>
-                  <span className="font-body text-[10px] text-muted-foreground shrink-0 ml-2 mt-0.5">
+                  <span className="font-body text-[10px] text-[#1f1a17]/60 shrink-0 ml-2 mt-1">
                     {period}
                   </span>
                 </div>
-                <p className="font-body text-xs text-muted-foreground leading-relaxed mb-3">
+                <p className="font-body text-xs text-[#1f1a17]/75 leading-relaxed mb-3">
                   {description}
                 </p>
                 <div className="flex flex-wrap gap-1">
                   {tech.map((t) => (
-                    <Badge key={t} variant="outline" className="font-body text-[10px] text-primary/70 border-primary/20 px-1.5 py-0">
+                    <span key={t} className="rounded-full border border-[#1f1a17]/25 bg-[#1f1a17]/5 px-2 py-0.5 font-body text-[10px]">
                       {t}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
               </div>

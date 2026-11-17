@@ -148,7 +148,7 @@ export default function BeyondTech() {
   };
 
   return (
-    <section id="beyond" className="py-16 md:py-28 px-6 bg-muted/40">
+    <section id="beyond" className="theme-sky py-16 md:py-28 px-6 bg-background text-foreground">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           number="05"
@@ -165,7 +165,7 @@ export default function BeyondTech() {
           <button
             onClick={() => handleManual((current - 1 + TOTAL) % TOTAL)}
             aria-label="Previous"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full border border-border bg-card shadow-sm flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors duration-200 text-sm"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full border-2 border-[#1f1a17] bg-card shadow-[3px_3px_0_0_#1f1a17] flex items-center justify-center text-[#1f1a17] hover:bg-[#1f1a17] hover:text-[#fcf8ed] transition-colors duration-200 text-base"
           >
             ←
           </button>
@@ -191,10 +191,10 @@ export default function BeyondTech() {
                   zIndex: zi,
                   transition: "transform 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.55s ease",
                 }}
-                className={`absolute w-[min(18rem,calc(100vw-3.5rem))] rounded-2xl border bg-card overflow-hidden p-5 sm:p-7 flex flex-col h-96 ${
+                className={`absolute w-[min(18rem,calc(100vw-3.5rem))] rounded-3xl border-2 border-[#1f1a17] bg-card overflow-hidden p-5 sm:p-7 flex flex-col h-96 ${
                   offset === 0
-                    ? "border-primary/30 shadow-lg"
-                    : "border-border cursor-pointer"
+                    ? "shadow-[7px_7px_0_0_#1f1a17]"
+                    : "cursor-pointer"
                 }`}
               >
                 {/* Watermark symbol */}
@@ -205,7 +205,10 @@ export default function BeyondTech() {
                   {card.symbol}
                 </span>
 
-                <p className="font-body text-[10px] text-primary tracking-[0.3em] uppercase mb-2">
+                <p
+                  className="self-start rounded-full border-2 border-[#1f1a17] px-3 py-1 font-body text-[9px] text-[#1f1a17] tracking-[0.2em] uppercase mb-3"
+                  style={{ background: ["#f6b3c6", "#f5cf5c", "#c9b8f0", "#7ec8f2"][i % 4] }}
+                >
                   {card.subtitle}
                 </p>
                 <h3 className="font-heading text-2xl font-semibold text-foreground mb-4">
@@ -231,7 +234,7 @@ export default function BeyondTech() {
           <button
             onClick={() => handleManual((current + 1) % TOTAL)}
             aria-label="Next"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full border border-border bg-card shadow-sm flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors duration-200 text-sm"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full border-2 border-[#1f1a17] bg-card shadow-[3px_3px_0_0_#1f1a17] flex items-center justify-center text-[#1f1a17] hover:bg-[#1f1a17] hover:text-[#fcf8ed] transition-colors duration-200 text-base"
           >
             →
           </button>

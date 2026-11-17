@@ -1,3 +1,14 @@
+import {
+  Briefcase,
+  Database,
+  Languages,
+  LockKeyhole,
+  MonitorSmartphone,
+  Rocket,
+  Server,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
 import SectionHeader from "./SectionHeader";
 
 const skillGroups = [
@@ -46,26 +57,61 @@ const skillGroups = [
   },
 ];
 
+// Card colours cycle through the groups; each group's sticker shows what it is.
+// Yellow leads so the last card (Languages) lands on coral, not the butter of Projects below.
+const cardColors = ["#f5cf5c", "#7ec8f2", "#f6b3c6", "#e8553e"];
+const stickers: Record<string, LucideIcon> = {
+  Frontend: MonitorSmartphone,
+  Backend: Server,
+  "Database & ORM": Database,
+  Authentication: LockKeyhole,
+  "DevOps & Deployment": Rocket,
+  Tools: Wrench,
+  Professional: Briefcase,
+  Languages: Languages,
+};
+
 export default function Skills() {
   return (
-    <section id="skills" className="py-16 md:py-28 px-6 bg-background">
+    <section id="skills" className="theme-ink py-16 md:py-28 px-6 bg-background text-foreground">
       <div className="max-w-5xl mx-auto">
         <SectionHeader number="02" title="Skills" />
 
-        <div className="border-t border-b border-border divide-y divide-border">
-          {skillGroups.map(({ category, skills }) => (
+        {/* Each group pins a little lower than the last, so they stack as you scroll */}
+        <div className="space-y-6">
+          {skillGroups.map(({ category, skills }, i) => {
+            const Sticker = stickers[category] ?? Wrench;
+            return (
             <div
               key={category}
-              className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-10 gap-y-1 py-5 reveal"
+              style={{ top: `calc(5.5rem + ${i * 14}px)`, background: cardColors[i % cardColors.length] }}
+              className="group sticky min-h-56 rounded-3xl border-2 border-[#1f1a17] p-7 md:p-10 text-[#1f1a17] shadow-[0_-8px_30px_rgba(0,0,0,0.35)] grid sm:grid-cols-[1fr_auto] gap-6"
             >
-              <span className="font-heading text-sm font-semibold text-primary pt-0.5">
-                {category}
+              <div>
+                <h3 className="font-heading text-3xl md:text-4xl font-semibold mb-5">
+                  {category}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="font-body text-sm rounded-full border border-[#1f1a17]/30 bg-white/25 px-3.5 py-1 transition-colors hover:bg-[#1f1a17] hover:text-[#fcf8ed]"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              {/* Sticker */}
+              <span
+                aria-hidden
+                className="hidden sm:grid size-24 place-items-center self-start rounded-full border-2 border-[#1f1a17] bg-[#fcf8ed] text-[#1f1a17] shadow-[4px_4px_0_0_#1f1a17] -rotate-12 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+              >
+                <Sticker className="size-11" strokeWidth={1.75} />
               </span>
-              <p className="font-body text-sm text-foreground leading-relaxed">
-                {skills.join(" · ")}
-              </p>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

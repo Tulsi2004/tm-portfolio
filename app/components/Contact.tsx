@@ -31,7 +31,7 @@ export default function Contact() {
   }, [state.success]);
 
   return (
-    <section id="contact" className="py-16 md:py-28 px-6 bg-background">
+    <section id="contact" className="theme-ink py-16 md:py-28 px-6 bg-background text-foreground">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           number="06"
@@ -41,25 +41,27 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-14 lg:gap-20 reveal">
           {/* Links + quote */}
-          <div>
+          <div className="min-w-0">
             <p className="font-body text-[10px] text-muted-foreground tracking-[0.3em] uppercase mb-7">
               Get in Touch
             </p>
-            <div className="space-y-6 mb-10">
-              {socials.map(({ label, value, href }) => (
+            <div className="space-y-4 mb-10">
+              {socials.map(({ label, value, href }, si) => (
                 <a
                   key={label}
                   href={href}
                   target={href.startsWith("mailto") || href.startsWith("tel") ? undefined : "_blank"}
                   rel="noopener noreferrer"
-                  className="flex items-center gap-5 group"
+                  style={{ background: ["#f6b3c6", "#7ec8f2", "#f5cf5c"][si % 3] }}
+                  className="flex items-center gap-4 rounded-full border-2 border-[#1f1a17] px-5 py-3 text-[#1f1a17] shadow-[4px_4px_0_0_#fcf8ed] transition-transform duration-200 hover:-translate-y-0.5 hover:-rotate-1 group"
                 >
-                  <span className="font-body text-[10px] text-muted-foreground tracking-widest uppercase w-20 shrink-0">
+                  <span className="hidden sm:inline font-body text-[10px] tracking-widest uppercase w-20 shrink-0 opacity-70">
                     {label}
                   </span>
-                  <span className="font-body text-sm text-foreground group-hover:text-primary transition-colors duration-200">
+                  <span className="font-body text-sm truncate">
                     {value}
                   </span>
+                  <span className="ml-auto transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </a>
               ))}
             </div>
@@ -73,7 +75,7 @@ export default function Contact() {
           </div>
 
           {/* Form */}
-          <div>
+          <div className="rounded-3xl border-2 border-border bg-card p-6 sm:p-8 shadow-[6px_6px_0_0_#f5cf5c]">
             <p className="font-body text-[10px] text-muted-foreground tracking-[0.3em] uppercase mb-7">
               Send a Message
             </p>
@@ -119,25 +121,6 @@ export default function Contact() {
               )}
             </form>
           </div>
-        </div>
-      </div>
-
-      {/* "Let's connect" marquee — two identical halves, slid by -50% for a seamless loop */}
-      <div aria-hidden className="mt-24 -mx-6 -mb-16 md:-mb-28 overflow-hidden border-t border-border py-8 md:py-12 select-none">
-        <div className="flex w-max animate-marquee motion-reduce:animate-none hover:[animation-play-state:paused]">
-          {[0, 1].map((half) => (
-            <div key={half} className="flex shrink-0">
-              {[0, 1, 2, 3].map((i) => (
-                <span
-                  key={i}
-                  className="flex items-center gap-10 pr-10 md:gap-16 md:pr-16 whitespace-nowrap font-heading italic font-light text-6xl md:text-8xl lg:text-9xl text-primary/80"
-                >
-                  Let&apos;s connect
-                  <span className="not-italic text-2xl md:text-4xl text-primary/35">◆</span>
-                </span>
-              ))}
-            </div>
-          ))}
         </div>
       </div>
     </section>
