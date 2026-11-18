@@ -72,6 +72,15 @@ const cards = [
     ],
   },
   {
+    symbol: "◒",
+    title: "Story Writing",
+    subtitle: "Fiction · Imagination · Words",
+    items: [
+      "Writes stories in spare time — a creative outlet beyond code",
+      "Enjoys building characters and worlds from a single idea",
+    ],
+  },
+  {
     symbol: "◑",
     title: "Yoga",
     subtitle: "Mind · Body · Balance",
